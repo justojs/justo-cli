@@ -4,19 +4,31 @@
 
 
 
-JustoJsonParser = (function () {function JustoJsonParser() {_classCallCheck(this, JustoJsonParser);}_createClass(JustoJsonParser, null, [{ key: "parse", value: 
+JustoJson = (function () {function JustoJson() {_classCallCheck(this, JustoJson);}_createClass(JustoJson, null, [{ key: "parse", value: 
 
 
 
 
 
 
-    function parse(fp) {
-      var file;
+    function parse(file) {
+
+      file = new _justoFs.File(file);
+      if (!file.exists()) throw new Error("The '" + file.path + "' file doesn't exist or this can't be accessed.");
 
 
-      file = new _justoFs.File(fp);
-      if (!file.exists()) throw new Error("The '" + fp + "' file doesn't exist or this can't be accessed.");
+      return file.json;} }, { key: "generate", value: 
 
 
-      return file.json;} }]);return JustoJsonParser;})();exports["default"] = JustoJsonParser;module.exports = exports["default"];
+
+
+
+
+
+    function generate(file) {
+      file = new _justoFs.File(file);
+      file.create();
+      file.json = { 
+        automator: { 
+          name: "app", 
+          main: "Justo.js" } };} }]);return JustoJson;})();exports["default"] = JustoJson;module.exports = exports["default"];

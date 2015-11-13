@@ -1,6 +1,6 @@
 {
   "name": "justo-cli",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "The Justo.js CLI.",
   "homepage": "http://www.justojs.org",
   "author": {
@@ -33,13 +33,15 @@
   },
   "dependencies": {
     "yargs": "*",
-    "justo-fs": "*"
+    "justo-fs": "*",
+    "justo-injector": "*"
   },
   "peerDependencies": {
 
   },
   "devDependencies": {
     "justo-assert": "*",
+    "justo-assert-fs": "*",
     "mocha": "*",
     "grunt": "^0.4.5",
     "grunt-babel": "^5",

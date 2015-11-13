@@ -22,7 +22,10 @@ module.exports = function(grunt) {
 
       es5: {
         files: {
-          "build/es5/lib/JustoJsonParser.js": "lib/JustoJsonParser.js"
+          "build/es5/lib/automator.js": "lib/automator.js",
+          "build/es5/lib/Call.js": "lib/Call.js",
+          "build/es5/lib/JustoJson.js": "lib/JustoJson.js",
+          "build/es5/lib/Workflow.js": "lib/Workflow.js"
         }
       }
     },
