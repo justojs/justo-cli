@@ -8,6 +8,10 @@ Workflow =
 
 
 
-function Workflow(title, fn) {_classCallCheck(this, Workflow);
-  Object.defineProperty(this, "title", { value: title, enumerable: true });
+function Workflow(opts, fn) {_classCallCheck(this, Workflow);
+
+  if (typeof opts == "string") opts = { title: opts };
+
+  Object.defineProperty(this, "title", { value: opts.title, enumerable: true });
+  Object.defineProperty(this, "description", { value: opts.desc || opts.description, enumerable: true });
   Object.defineProperty(this, "fn", { value: fn, enumerable: true });};exports["default"] = Workflow;module.exports = exports["default"];

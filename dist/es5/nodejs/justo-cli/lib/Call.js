@@ -9,4 +9,8 @@
 
 
     function get() {
-      return this.workflow.title;} }]);return Call;})();exports["default"] = Call;module.exports = exports["default"];
+      return this.workflow.title;} }, { key: "description", get: 
+
+
+    function get() {
+      return this.workflow.description;} }]);return Call;})();exports["default"] = Call;module.exports = exports["default"];
