@@ -109,7 +109,8 @@ module.exports = function(grunt) {
 
   //aliases
   grunt.registerTask("buildes5", ["jshint", "clean:es5", "babel:es5", "copy:nodejs"]);
-  grunt.registerTask("es5", ["buildes5", "mochaTest:es5"]);
+  grunt.registerTask("test", ["mochaTest:es5"]);
+  grunt.registerTask("es5", ["buildes5", "test"]);
 
   // Default task
   grunt.registerTask("default", []);
