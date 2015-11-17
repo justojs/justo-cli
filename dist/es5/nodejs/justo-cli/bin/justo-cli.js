@@ -15,31 +15,37 @@ pkg = require("../package.json");
 
 //(2) get arguments
 opts = yargs
-  .usage("Usage: justo [options]")
-  .help("h")
-  .alias("h", "help")
-  .version(pkg.version, "v", "Display the Justo.js version.")
-  .alias("v", "version")
-  .option("generate", {
-    alias: "g",
+  .usage("Usage: justo [options] [works]")
+  .option("g", {
+    alias: "generate",
     describe: "Generate the Justo.json file in the current directory.",
     type: "boolean",
     default: false
   })
-  .option("list", {
-    alias: "l",
-    describe: "List the registered workflows into the Justo.js file.",
+  .help("h", "Show help.")
+  .alias("h", "help")
+  .option("l", {
+    alias: "list",
+    describe: "List the registered works into the Justo.js file.",
     type: "boolean",
     default: false
   })
-  .epilogue(`Copyright (c) ${pkg.years} ${pkg.author.name}.\nProudly made with ♥ in Valencia, Spain, EU.\nIn memory of Justo González Mallols.`)
+  .option("p", {
+    alias: "parse",
+    describe: "Parse the work parameters.",
+    type: "boolean",
+    default: false
+  })
+  .version(pkg.version, "v", "Show CLI version.")
+  .alias("v", "version")
+  .epilogue(`Bugs: https://github.com/justojs/justo-issues\n\nProudly made with ♥ in Valencia, Spain, EU.\nCopyright (c) ${pkg.years} ${pkg.author.name}.\nIn memory of Justo González Mallols.`)
   .argv;
 
 //(3) run
 if (opts.generate) {
   require("../lib/JustoJson").generate("./Justo.json");
 } else if (opts.list) {
-  require("../lib/automator").list("./Justo.json");
+  require("../lib/automator/automator").list("./Justo.json");
 } else {
-  require("../lib/automator").run("./Justo.json", opts._);
+  require("../lib/automator/automator").run("./Justo.json", opts.parse, opts._);
 }
