@@ -12,8 +12,7 @@ Register =
 
 
 
-
-function Register(title, opts, task) {_classCallCheck(this, Register);
-  Object.defineProperty(this, "title", { value: title, enumerable: true });
+function Register(opts, task) {_classCallCheck(this, Register);
+  Object.defineProperty(this, "name", { value: opts.name, enumerable: true });
   Object.defineProperty(this, "description", { value: opts.desc || opts.description || task.description || "", enumerable: true });
   Object.defineProperty(this, "task", { value: task, enumerable: true });};exports["default"] = Register;module.exports = exports["default"];

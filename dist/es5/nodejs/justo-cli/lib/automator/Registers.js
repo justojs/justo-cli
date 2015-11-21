@@ -11,10 +11,8 @@ Registers = (function () {function Registers() {_classCallCheck(this, Registers)
 
 
 
-
-    function add(title, opts, task) {
-      this[title] = new _Register2["default"](title, opts, task);} }, { key: "exists", value: 
-
+    function add(opts, task) {
+      this[opts.name] = new _Register2["default"](opts, task);} }, { key: "exists", value: 
 
 
 
@@ -22,5 +20,6 @@ Registers = (function () {function Registers() {_classCallCheck(this, Registers)
 
 
 
-    function exists(title) {
-      return !!this[title];} }]);return Registers;})();exports["default"] = Registers;module.exports = exports["default"];
+
+    function exists(name) {
+      return !!this[name];} }]);return Registers;})();exports["default"] = Registers;module.exports = exports["default"];

@@ -10,12 +10,4 @@
 
 
     function isSimple() {
-      return this.task.__task__.isSimple();} }, { key: "isMacro", value: 
-
-
-    function isMacro() {
-      return this.task.__task__.isMacro();} }, { key: "isWorkflow", value: 
-
-
-    function isWorkflow() {
-      return this.task.__task__.isWorkflow();} }, { key: "description", get: function get() {return this.task.__task__.description;} }]);return Call;})();exports["default"] = Call;module.exports = exports["default"];
+      return this.task.__task__.isSimple();} }, { key: "description", get: function get() {return this.task.__task__.description;} }]);return Call;})();exports["default"] = Call;module.exports = exports["default"];

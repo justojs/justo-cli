@@ -9,8 +9,8 @@
 var registers = new _Registers2["default"]();
 
 
-function register(name) {
-  var opts, item, task, workflow;for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {args[_key - 1] = arguments[_key];}
+function register() {
+  var opts, item, task, workflow;for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}
 
 
   if (args.length === 0) {
@@ -23,30 +23,32 @@ function register(name) {
     opts = args[0];item = args[1];}
 
 
-  if (!opts) opts = {};
+  if (typeof opts == "string") opts = { name: opts };
+  if (!opts || !opts.name) throw new Error("Expected name.");
 
 
   workflow = require(_path2["default"].join(process.cwd(), "node_modules", "justo")).workflow;
 
   if (item instanceof Function) {
     if (item.__task__) task = item;else 
-    task = workflow(name, opts, item);} else 
-  {
-    task = workflow(name, opts, function (params) {var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
-        for (var _iterator = item[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var _registers$title;var title = _step.value;
-          (_registers$title = registers[title]).task.apply(_registers$title, [title].concat(_toConsumableArray(params)));}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator["return"]) {_iterator["return"]();}} finally {if (_didIteratorError) {throw _iteratorError;}}}});
+      task = workflow(opts, item);} else 
+    {
+      task = workflow(opts, function (params) {var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
+
+          for (var _iterator = item[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var _registers$_name;var _name = _step.value;
+            (_registers$_name = registers[_name]).task.apply(_registers$_name, [_name].concat(_toConsumableArray(params)));}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator["return"]) {_iterator["return"]();}} finally {if (_didIteratorError) {throw _iteratorError;}}}});
 
 
 
-    task.checkWorkflows = function () {var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
-        for (var _iterator2 = item[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var i = _step2.value;
-          if (!registers.exists(i)) throw new Error("The '" + i + "' workflow is not registered.");}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2["return"]) {_iterator2["return"]();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}};}
+      task.checkWorkflows = function () {var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
+          for (var _iterator2 = item[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var _name2 = _step2.value;
+            if (!registers.exists(_name2)) throw new Error("The '" + _name2 + "' workflow is not registered.");}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2["return"]) {_iterator2["return"]();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}};}
 
 
 
 
 
-  registers.add(name, opts, task);}
+  registers.add(opts, task);}
 
 
 
@@ -109,11 +111,14 @@ function run(file, parseCall, calls) {
 
 
   function parse(call) {
-    var title, params;
+    var name, params;
 
 
-    if (call.indexOf(":") > 0) {
-      title = call.substr(0, call.indexOf(":"));
+    if (call.indexOf(":") < 0) {
+      name = call;
+      params = [];} else 
+    {
+      name = call.substr(0, call.indexOf(":"));
       params = call.split(":").slice(1);
 
       if (parseCall) {
@@ -126,16 +131,13 @@ function run(file, parseCall, calls) {
             param = Number(param);}
 
 
-          params[i] = param;}}} else 
-
-
-    {
-      title = call;
-      params = [];}
+          params[i] = param;}}}
 
 
 
-    return [title, params];}}
+
+
+    return [name, params];}}
 
 
 
@@ -149,9 +151,9 @@ function list(file) {
   load(file);var _iteratorNormalCompletion4 = true;var _didIteratorError4 = false;var _iteratorError4 = undefined;try {
 
 
-    for (var _iterator4 = Object.keys(registers).sort()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {var _name = _step4.value;
-      var reg = registers[_name];
-      tbl.push([reg.title, reg.description]);}} catch (err) {_didIteratorError4 = true;_iteratorError4 = err;} finally {try {if (!_iteratorNormalCompletion4 && _iterator4["return"]) {_iterator4["return"]();}} finally {if (_didIteratorError4) {throw _iteratorError4;}}}
+    for (var _iterator4 = Object.keys(registers).sort()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {var _name3 = _step4.value;
+      var reg = registers[_name3];
+      tbl.push([reg.name, reg.description]);}} catch (err) {_didIteratorError4 = true;_iteratorError4 = err;} finally {try {if (!_iteratorNormalCompletion4 && _iterator4["return"]) {_iterator4["return"]();}} finally {if (_didIteratorError4) {throw _iteratorError4;}}}
 
 
 
