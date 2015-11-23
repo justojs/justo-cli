@@ -26,6 +26,7 @@ module.exports = function(grunt) {
           "build/es5/lib/automator/Call.js": "lib/automator/Call.js",
           "build/es5/lib/automator/Register.js": "lib/automator/Register.js",
           "build/es5/lib/automator/Registers.js": "lib/automator/Registers.js",
+          "build/es5/lib/installer.js": "lib/installer.js",
           "build/es5/lib/JustoJson.js": "lib/JustoJson.js"
         }
       }

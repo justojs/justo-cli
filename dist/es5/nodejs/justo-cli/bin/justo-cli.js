@@ -24,6 +24,12 @@ opts = yargs
   })
   .help("h", "Show help.")
   .alias("h", "help")
+  .option("i", {
+    alias: "install",
+    describe: "Install the Justo.js packages. Require npm installed.",
+    type: "boolean",
+    default: false
+  })
   .option("l", {
     alias: "list",
     describe: "List the registered works into the Justo.js file.",
@@ -44,6 +50,8 @@ opts = yargs
 //(3) run
 if (opts.generate) {
   require("../lib/JustoJson").generate("./Justo.json");
+} else if (opts.install) {
+  require("../lib/installer").install();
 } else if (opts.list) {
   require("../lib/automator/automator").list("./Justo.json");
 } else {
