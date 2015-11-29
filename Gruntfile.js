@@ -22,12 +22,16 @@ module.exports = function(grunt) {
 
       es5: {
         files: {
-          "build/es5/lib/automator/automator.js": "lib/automator/automator.js",
-          "build/es5/lib/automator/Call.js": "lib/automator/Call.js",
-          "build/es5/lib/automator/Register.js": "lib/automator/Register.js",
-          "build/es5/lib/automator/Registers.js": "lib/automator/Registers.js",
-          "build/es5/lib/installer.js": "lib/installer.js",
-          "build/es5/lib/JustoJson.js": "lib/JustoJson.js"
+          "build/es5/lib/AutomatorWork.js": "lib/AutomatorWork.js",
+          "build/es5/lib/Call.js": "lib/Call.js",
+          "build/es5/lib/Calls.js": "lib/Calls.js",
+          "build/es5/lib/Cli.js": "lib/Cli.js",
+          "build/es5/lib/JustoJson.js": "lib/JustoJson.js",
+          "build/es5/lib/Loader.js": "lib/Loader.js",
+          "build/es5/lib/Runner.js": "lib/Runner.js",
+          "build/es5/lib/TesterWork.js": "lib/TesterWork.js",
+          "build/es5/lib/Work.js": "lib/Work.js",
+          "build/es5/lib/Works.js": "lib/Works.js"
         }
       }
     },
@@ -41,7 +45,7 @@ module.exports = function(grunt) {
     copy: {
       nodejs: {
         files: [
-          {cwd: "build/es5/", src: ["lib/*.js", "lib/automator/*.js"], dest: "dist/es5/nodejs/<%= pkg.name %>/", expand: true},
+          {cwd: "build/es5/", src: ["lib/*.js"], dest: "dist/es5/nodejs/<%= pkg.name %>/", expand: true},
           {src: ["bin/justo-cli.js"], dest: "dist/es5/nodejs/<%= pkg.name %>/", expand: true},
           {src: ["package.json", "README.md"], dest: "dist/es5/nodejs/<%= pkg.name %>/", expand: true},
           {src: ["test/**/*.*"], dest: "dist/es5/nodejs/<%= pkg.name %>", expand: true}

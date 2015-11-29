@@ -9,20 +9,19 @@ const JustoJson = require("../../../dist/es5/nodejs/justo-cli/lib/JustoJson");
 describe("JustoJson", function() {
   const DATA_DIR = "test/unit/data";
 
-  describe("#parse()", function() {
-    const parse = JustoJson.parse;
+  describe("#read()", function() {
+    const read = JustoJson.read;
 
-    it("parse(file)", function() {
-      parse(path.join(DATA_DIR, "Justo.json")).must.have({
-        automator: {
-          name: "app",
+    it("read(file)", function() {
+      read(path.join(DATA_DIR, "Justo.json")).must.have({
+        runner: {
           main: "Justo.js"
         }
       });
     });
 
-    it("parse(file) - unknown", function() {
-      parse.must.raise(/file doesn't exist/, [path.join(DATA_DIR, "Justo.js.unknown")]);
+    it.skip("read(file) - unknown", function() {
+      read.must.raise(/file doesn't exist/, [path.join(DATA_DIR, "Justo.js.unknown")]);
     });
   });
 
@@ -42,8 +41,7 @@ describe("JustoJson", function() {
       generate(path.join(DIR.path, "Justo.json"));
       file(DIR.path, "Justo.json").must.exist();
       file(DIR.path, "Justo.json").json.must.be.eq({
-        automator: {
-          name: "app",
+        runner: {
           main: "Justo.js"
         }
       });

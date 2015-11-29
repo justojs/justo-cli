@@ -4,6 +4,7 @@
 //imports
 const path = require("path");
 const yargs = require("yargs");
+const Cli = require("../lib/Cli.js");
 
 //////////
 // main //
@@ -48,12 +49,7 @@ opts = yargs
   .argv;
 
 //(3) run
-if (opts.generate) {
-  require("../lib/JustoJson").generate("./Justo.json");
-} else if (opts.install) {
-  require("../lib/installer").install();
-} else if (opts.list) {
-  require("../lib/automator/automator").list("./Justo.json");
-} else {
-  require("../lib/automator/automator").run("./Justo.json", opts.parse, opts._);
-}
+if (opts.generate) Cli.generateJustoJson("./Justo.json");
+else if (opts.install) Cli.installJusto();
+else if (opts.list) Cli.listRegisteredWorks("./Justo.json");
+else Cli.runWorks("./Justo.json", opts._, {parse: opts.parse});

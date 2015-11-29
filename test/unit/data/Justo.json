@@ -1,6 +1,5 @@
 {
-  "automator": {
-    "name": "app",
+  "runner": {
     "main": "Justo.js"
   }
 }
