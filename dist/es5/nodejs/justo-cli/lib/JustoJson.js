@@ -19,7 +19,11 @@ JustoJson = (function () {function JustoJson() {_classCallCheck(this, JustoJson)
       file.create();
       file.json = { 
         runner: { 
-          main: "Justo.js" } };} }, { key: "read", value: 
+          main: "Justo.js", 
+          logger: { 
+            minLevel: "info", 
+            maxLevel: "fatal" } } };} }, { key: "read", value: 
+
 
 
 
@@ -44,6 +48,10 @@ JustoJson = (function () {function JustoJson() {_classCallCheck(this, JustoJson)
       if (!config.tester) config.tester = {};
 
 
+      return config;} }, { key: "config", get: 
+
+
+    function get() {
       return config;} }, { key: "runner", get: 
 
 

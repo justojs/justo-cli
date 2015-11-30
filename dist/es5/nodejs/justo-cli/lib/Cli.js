@@ -57,10 +57,14 @@ Cli = (function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli
 
         for (var _iterator = Object.keys(works).sort()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var _name = _step.value;
           var work = works[_name];
-          tbl.push([work.name, work.isTesterWork() ? "tester" : "automator", work.desc]);}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator["return"]) {_iterator["return"]();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
+          tbl.push([
+          work.name, 
+          work.isTesterWork() ? "test" : work.isAutomatorWork() ? "autom" : "macro", 
+          work.desc]);}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator["return"]) {_iterator["return"]();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
 
 
-      if (tbl.length > 0) tbl = [["Name", "Runner", "Description"]].concat(tbl);
+
+      if (tbl.length > 0) tbl = [["Name", "Type", "Description"]].concat(tbl);
       console.log(table(tbl));} }, { key: "runWorks", value: 
 
 

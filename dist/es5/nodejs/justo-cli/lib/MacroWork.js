@@ -4,25 +4,44 @@
 
 
 
-
-
-AutomatorWork = (function (_Work) {_inherits(AutomatorWork, _Work);
+MacroWork = (function (_Work) {_inherits(MacroWork, _Work);
 
 
 
 
 
 
-  function AutomatorWork(opts, task) {_classCallCheck(this, AutomatorWork);
-    _get(Object.getPrototypeOf(AutomatorWork.prototype), "constructor", this).call(this, opts);
-    Object.defineProperty(this, "task", { value: task, enumerable: true });}_createClass(AutomatorWork, [{ key: "isAutomatorWork", value: 
+  function MacroWork(opts, calls) {_classCallCheck(this, MacroWork);
+    _get(Object.getPrototypeOf(MacroWork.prototype), "constructor", this).call(this, opts);
+    Object.defineProperty(this, "calls", { value: calls, enumerable: true });}_createClass(MacroWork, [{ key: "getWorks", value: 
+
+
+
+
+
+
+
+
+    function getWorks(works) {
+      var res;
+
+
+      res = [];var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
+        for (var _iterator = this.calls[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var call = _step.value;
+          var work = works[call.name];
+          if (!work) throw new Error("The '" + call.name + "' work is not registered.");
+          res.push(work);}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator["return"]) {_iterator["return"]();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
+
+
+
+      return res;} }, { key: "isAutomatorWork", value: 
 
 
 
 
 
     function isAutomatorWork() {
-      return true;} }, { key: "isTesterWork", value: 
+      return false;} }, { key: "isTesterWork", value: 
 
 
 
@@ -36,4 +55,4 @@ AutomatorWork = (function (_Work) {_inherits(AutomatorWork, _Work);
 
 
     function isMacroWork() {
-      return false;} }]);return AutomatorWork;})(_Work3["default"]);exports["default"] = AutomatorWork;module.exports = exports["default"];
+      return true;} }]);return MacroWork;})(_Work3["default"]);exports["default"] = MacroWork;module.exports = exports["default"];

@@ -14,10 +14,22 @@ TesterWork = (function (_Work) {_inherits(TesterWork, _Work);
 
 
   function TesterWork(regOpts, testOpts) {_classCallCheck(this, TesterWork);
+
+    testOpts = Object.assign({}, testOpts);
+
+    if (testOpts.require) {
+      if (typeof testOpts.require == "string") testOpts.require = [testOpts.require];} else 
+    {
+      testOpts.require = [];}
+
+
+
     _get(Object.getPrototypeOf(TesterWork.prototype), "constructor", this).call(this, regOpts);
+
+
     Object.defineProperty(this, "source", { value: testOpts.source || testOpts.src || [], enumerable: true });
-    Object.defineProperty(this, "require", { value: testOpts.require || [], enumerable: true });
-    Object.defineProperty(this, "timeout", { value: testOpts.timeout, enumerable: true });}_createClass(TesterWork, [{ key: "isTesterWork", value: 
+    Object.defineProperty(this, "require", { value: testOpts.require, enumerable: true });
+    Object.defineProperty(this, "timeout", { value: testOpts.timeout, enumerable: true });}_createClass(TesterWork, [{ key: "isAutomatorWork", value: 
 
 
 
@@ -25,10 +37,24 @@ TesterWork = (function (_Work) {_inherits(TesterWork, _Work);
 
 
 
+
+
+
+
+
+    function isAutomatorWork() {
+      return false;} }, { key: "isTesterWork", value: 
 
 
 
 
 
     function isTesterWork() {
-      return true;} }, { key: "src", get: function get() {return this.source;} }]);return TesterWork;})(_Work3["default"]);exports["default"] = TesterWork;module.exports = exports["default"];
+      return true;} }, { key: "isMacroWork", value: 
+
+
+
+
+
+    function isMacroWork() {
+      return false;} }, { key: "src", get: function get() {return this.source;} }]);return TesterWork;})(_Work3["default"]);exports["default"] = TesterWork;module.exports = exports["default"];

@@ -22,4 +22,7 @@ Runner = (function () {function Runner() {_classCallCheck(this, Runner);}_create
 
         for (var _iterator2 = calls[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var call = _step2.value;
           var work = works[call.name];
-          justo.run(work, call.params);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2["return"]) {_iterator2["return"]();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}} }]);return Runner;})();exports["default"] = Runner;module.exports = exports["default"];
+
+          if (work.isMacroWork()) justo.run(work, work.getWorks(works));else 
+          if (work.isAutomatorWork()) justo.run(work, call.params);else 
+          justo.run(work);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2["return"]) {_iterator2["return"]();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}} }]);return Runner;})();exports["default"] = Runner;module.exports = exports["default"];

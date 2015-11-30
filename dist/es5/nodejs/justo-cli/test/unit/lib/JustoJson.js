@@ -42,7 +42,11 @@ describe("JustoJson", function() {
       file(DIR.path, "Justo.json").must.exist();
       file(DIR.path, "Justo.json").json.must.be.eq({
         runner: {
-          main: "Justo.js"
+          main: "Justo.js",
+          logger: {
+            minLevel: "info",
+            maxLevel: "fatal"
+          }
         }
       });
     });

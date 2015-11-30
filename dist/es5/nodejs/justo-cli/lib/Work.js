@@ -13,7 +13,7 @@ Work = (function () {
 
   function Work(opts) {_classCallCheck(this, Work);
     Object.defineProperty(this, "name", { value: opts.name, enumerable: true });
-    Object.defineProperty(this, "description", { value: opts.desc || opts.description || "", enumerable: true });}_createClass(Work, [{ key: "isTesterWork", value: 
+    Object.defineProperty(this, "description", { value: opts.desc || opts.description || "", enumerable: true });}_createClass(Work, [{ key: "isAutomatorWork", value: 
 
 
 
@@ -21,6 +21,16 @@ Work = (function () {
 
 
 
+
+
+
+
+
+
+
+
+    function isAutomatorWork() {
+      throw new Error("Abstract method.");} }, { key: "isTesterWork", value: 
 
 
 
@@ -30,4 +40,14 @@ Work = (function () {
 
 
     function isTesterWork() {
+      throw new Error("Abstract method.");} }, { key: "isMacroWork", value: 
+
+
+
+
+
+
+
+
+    function isMacroWork() {
       throw new Error("Abstract method.");} }, { key: "desc", get: function get() {return this.description;} }]);return Work;})();exports["default"] = Work;module.exports = exports["default"];

@@ -1,9 +1,12 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _createClass = (function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};})();function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { "default": obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];return arr2;} else {return Array.from(arr);}}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var _path = require(
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _createClass = (function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};})();function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { "default": obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var _path = require(
 "path");var _path2 = _interopRequireDefault(_path);var _Cli = require(
 "./Cli");var _Cli2 = _interopRequireDefault(_Cli);var _Works = require(
 "./Works");var _Works2 = _interopRequireDefault(_Works);var _AutomatorWork = require(
-"./AutomatorWork");var _AutomatorWork2 = _interopRequireDefault(_AutomatorWork);var _TesterWork = require(
-"./TesterWork");var _TesterWork2 = _interopRequireDefault(_TesterWork);
+"./AutomatorWork");var _AutomatorWork2 = _interopRequireDefault(_AutomatorWork);var _MacroWork = require(
+"./MacroWork");var _MacroWork2 = _interopRequireDefault(_MacroWork);var _TesterWork = require(
+"./TesterWork");var _TesterWork2 = _interopRequireDefault(_TesterWork);var _JustoJson = require(
+"./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);var _Calls = require(
+"./Calls");var _Calls2 = _interopRequireDefault(_Calls);
 
 
 var JUSTO = _path2["default"].join(process.cwd(), "node_modules", "justo");
@@ -23,7 +26,7 @@ Loader = (function () {function Loader() {_classCallCheck(this, Loader);}_create
 
 
       justo = Loader.importJusto();
-      justo.initialize();
+      justo.initialize(_JustoJson2["default"].config);
 
 
       justo.publish(register);
@@ -87,8 +90,18 @@ function register() {
   if (!opts || !opts.name) throw new Error("Expected work name.");
 
 
-  if (typeof work == "function" || work instanceof Array) addAutomatorWork(opts, work);else 
-  addTesterWork(opts, work);
+  if (work instanceof Function) {
+    var workflow = justo.workflow, task;
+
+    if (work.__task__) work = new _AutomatorWork2["default"](opts, work);else 
+    work = new _AutomatorWork2["default"](opts, workflow(opts, work));} else 
+  if (work instanceof Array) {
+    work = new _MacroWork2["default"](opts, _Calls2["default"].parse(work));} else 
+  {
+    work = new _TesterWork2["default"](opts, work);}
+
+
+  works.add(work);
 
 
   function addTesterWork(regOpts, workOpts) {
@@ -96,26 +109,7 @@ function register() {
 
 
   function addAutomatorWork(opts, work) {
-    var workflow = justo.workflow, task;
-
-
-    if (work instanceof Function) {
-      if (work.__task__) task = work;else 
-        task = workflow(opts, work);} else 
-      {
-        task = workflow(opts, function (params) {var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
-
-            for (var _iterator = work[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var _works$_name;var _name = _step.value;
-              (_works$_name = works[_name]).task.apply(_works$_name, [_name].concat(_toConsumableArray(params)));}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator["return"]) {_iterator["return"]();}} finally {if (_didIteratorError) {throw _iteratorError;}}}});
 
 
 
-        task.checkWorks = function () {var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
-            for (var _iterator2 = item[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var _name2 = _step2.value;
-              if (!works.exists(_name2)) throw new Error("The '" + _name2 + "' work is not registered.");}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2["return"]) {_iterator2["return"]();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}};}
-
-
-
-
-
-    works.add(new _AutomatorWork2["default"](opts, task));}}module.exports = exports["default"];
+    works.add(work);}}module.exports = exports["default"];

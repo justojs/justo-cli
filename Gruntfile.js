@@ -28,6 +28,7 @@ module.exports = function(grunt) {
           "build/es5/lib/Cli.js": "lib/Cli.js",
           "build/es5/lib/JustoJson.js": "lib/JustoJson.js",
           "build/es5/lib/Loader.js": "lib/Loader.js",
+          "build/es5/lib/MacroWork.js": "lib/MacroWork.js",
           "build/es5/lib/Runner.js": "lib/Runner.js",
           "build/es5/lib/TesterWork.js": "lib/TesterWork.js",
           "build/es5/lib/Work.js": "lib/Work.js",
