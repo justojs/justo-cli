@@ -20,6 +20,7 @@ JustoJson = (function () {function JustoJson() {_classCallCheck(this, JustoJson)
       file.json = { 
         runner: { 
           main: "Justo.js", 
+          onError: "continue", 
           logger: { 
             minLevel: "info", 
             maxLevel: "fatal" } } };} }, { key: "read", value: 
@@ -43,6 +44,7 @@ JustoJson = (function () {function JustoJson() {_classCallCheck(this, JustoJson)
       if (!config.runner.main) config.runner.main = "./Justo.js";
       if (!config.runner.main.startsWith(".")) config.runner.main = _path2["default"].join(".", config.runner.main);
       config.runner.main = _path2["default"].normalize(config.runner.main);
+      if (!config.runner.onError) config.runner.onError = "continue";
 
       if (!config.automator) config.automator = {};
       if (!config.tester) config.tester = {};

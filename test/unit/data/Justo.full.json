@@ -1,0 +1,6 @@
+{
+  "runner": {
+    "main": "Justo.full.js",
+    "onError": "break"
+  }
+}

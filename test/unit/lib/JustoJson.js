@@ -12,16 +12,31 @@ describe("JustoJson", function() {
   describe("#read()", function() {
     const read = JustoJson.read;
 
-    it("read(file)", function() {
+    it("read(file) - onError not indicated", function() {
       read(path.join(DATA_DIR, "Justo.json")).must.have({
         runner: {
-          main: "Justo.js"
+          main: "Justo.js",
+          onError: "continue"
         }
       });
     });
 
-    it.skip("read(file) - unknown", function() {
-      read.must.raise(/file doesn't exist/, [path.join(DATA_DIR, "Justo.js.unknown")]);
+    it("read(file) - onError indicated", function() {
+      read(path.join(DATA_DIR, "Justo.full.json")).must.have({
+        runner: {
+          main: "Justo.full.js",
+          onError: "break"
+        }
+      });
+    });
+
+    it("read(file) - unknown file", function() {
+      read(path.join(DATA_DIR, "unknown.Justo.js")).must.have({
+        runner: {
+          main: "Justo.js",
+          onError: "continue"
+        }
+      });
     });
   });
 
@@ -43,6 +58,7 @@ describe("JustoJson", function() {
       file(DIR.path, "Justo.json").json.must.be.eq({
         runner: {
           main: "Justo.js",
+          onError: "continue",
           logger: {
             minLevel: "info",
             maxLevel: "fatal"
