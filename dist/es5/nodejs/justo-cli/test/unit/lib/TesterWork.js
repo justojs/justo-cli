@@ -17,13 +17,13 @@ describe("TesterWork", function() {
       work.isTesterWork().must.be.eq(true);
     });
 
-    it("constructor(workOpts, testOpts) - {require: string}", function() {
-      var work = new TesterWork({name: "test"}, {require: "justo-assert"});
+    it("constructor(workOpts, testOpts) - {require: string, src: string}", function() {
+      var work = new TesterWork({name: "test"}, {require: "justo-assert", src: "test/unit/lib/"});
 
       work.must.have({
         name: "test",
         desc: "",
-        src: [],
+        src: ["test/unit/lib/"],
         require: ["justo-assert"],
         timeout: undefined
       });
@@ -31,29 +31,15 @@ describe("TesterWork", function() {
       work.isTesterWork().must.be.eq(true);
     });
 
-    it("constructor(workOpts, testOpts) - {require: string[]}", function() {
-      var work = new TesterWork({name: "test"}, {require: ["justo-assert"]});
+    it("constructor(workOpts, testOpts) - {require: string[], src: string[]}", function() {
+      var work = new TesterWork({name: "test"}, {require: ["justo-assert"], src: ["one.js", "two.js"]});
 
       work.must.have({
         name: "test",
         desc: "",
-        src: [],
+        src: ["one.js", "two.js"],
         require: ["justo-assert"],
         timeout: undefined
-      });
-
-      work.isTesterWork().must.be.eq(true);
-    });
-
-    it("constructor(workOpts, testOpts) - {src, require, timeout}", function() {
-      var work = new TesterWork({name: "test"}, {src: ["one.js"], require: "justo-assert", timeout: 1500});
-
-      work.must.have({
-        name: "test",
-        desc: "",
-        src: ["one.js"],
-        require: ["justo-assert"],
-        timeout: 1500
       });
 
       work.isTesterWork().must.be.eq(true);

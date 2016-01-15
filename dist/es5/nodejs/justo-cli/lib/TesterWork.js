@@ -23,11 +23,14 @@ TesterWork = (function (_Work) {_inherits(TesterWork, _Work);
       testOpts.require = [];}
 
 
+    if (testOpts.src) testOpts.source = testOpts.src;
+    if (typeof testOpts.source == "string") testOpts.source = [testOpts.source];
+
 
     _get(Object.getPrototypeOf(TesterWork.prototype), "constructor", this).call(this, regOpts);
 
 
-    Object.defineProperty(this, "source", { value: testOpts.source || testOpts.src || [], enumerable: true });
+    Object.defineProperty(this, "source", { value: testOpts.source || [], enumerable: true });
     Object.defineProperty(this, "require", { value: testOpts.require, enumerable: true });
     Object.defineProperty(this, "timeout", { value: testOpts.timeout, enumerable: true });}_createClass(TesterWork, [{ key: "isAutomatorWork", value: 
 
