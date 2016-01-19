@@ -21,12 +21,13 @@ Loader = (function () {function Loader() {_classCallCheck(this, Loader);}_create
 
 
 
-    function loadJustoJs(file) {
+
+    function loadJustoJs(file) {var opts = arguments.length <= 1 || arguments[1] === undefined ? { only: false } : arguments[1];
       var justo, autom;
 
 
       justo = Loader.importJusto();
-      justo.initialize(_JustoJson2["default"].config);
+      justo.initialize(Object.assign({ only: opts.only }, _JustoJson2["default"].config));
 
 
       justo.publish(register);

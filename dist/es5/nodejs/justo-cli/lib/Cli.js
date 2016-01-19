@@ -83,11 +83,11 @@ Cli = (function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli
 
 
       if (!calls || calls.length === 0) calls = ["default"];
-      if (!opts) opts = { parse: false };
+      if (!opts) opts = { parse: false, only: false };
 
 
       justojson = _JustoJson2["default"].read(justojson);
-      works = Loader.loadJustoJs(justojson.runner.main);
+      works = Loader.loadJustoJs(justojson.runner.main, { only: opts.only });
 
 
       Runner.run(Calls.parse(calls, opts), works);} }]);return Cli;})();exports["default"] = Cli;module.exports = exports["default"];

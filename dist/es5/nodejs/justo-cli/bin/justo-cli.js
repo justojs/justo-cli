@@ -38,6 +38,12 @@ opts = yargs
     type: "boolean",
     default: false
   })
+  .option("o", {
+    alias: "only",
+    describe: "Only run the suites fixed as only.",
+    type: "boolean",
+    default: false
+  })
   .option("p", {
     alias: "parse",
     describe: "Parse the work parameters.",
@@ -53,4 +59,4 @@ opts = yargs
 if (opts.generate) Cli.generateJustoJson("./Justo.json");
 else if (opts.install) Cli.installJusto();
 else if (opts.list) Cli.listRegisteredWorks("./Justo.json");
-else Cli.runWorks("./Justo.json", opts._, {parse: opts.parse});
+else Cli.runWorks("./Justo.json", opts._, {parse: opts.parse, only: opts.only});
