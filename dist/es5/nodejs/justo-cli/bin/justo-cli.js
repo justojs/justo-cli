@@ -40,7 +40,7 @@ opts = yargs
   })
   .option("o", {
     alias: "only",
-    describe: "Only run the suites fixed as only.",
+    describe: "Only run suites and tests fixed as only.",
     type: "boolean",
     default: false
   })
