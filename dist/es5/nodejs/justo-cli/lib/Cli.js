@@ -35,7 +35,7 @@ Cli = (function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli
 
 
     function generateJustoJson(path) {
-      _JustoJson2["default"].generate(path);} }, { key: "listRegisteredWorks", value: 
+      _JustoJson2["default"].generate(path);} }, { key: "listCatalogedTasks", value: 
 
 
 
@@ -43,43 +43,43 @@ Cli = (function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli
 
 
 
-    function listRegisteredWorks(path) {
-      var Loader = require("./Loader");
+    function listCatalogedTasks(path) {
+      var Loader = require("justo-loader").Loader;
       var table = require("text-table");
-      var works, tbl;
+      var justo, config, tbl;
 
 
-      _JustoJson2["default"].read(path);
-      works = Loader.loadJustoJs(_JustoJson2["default"].runner.main);
+      config = _JustoJson2["default"].read(path);
+      justo = Loader.loadJusto();
+      justo.initialize(config);
+      Loader.load(config.runner.main);
 
 
       tbl = [];var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
+        for (var _iterator = Object.keys(justo.runner.catalog.tasks).sort()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var _name = _step.value;
+          var task = justo.runner.catalog.get(_name).__task__;
 
-        for (var _iterator = Object.keys(works).sort()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var _name = _step.value;
-          var work = works[_name];
           tbl.push([
-          work.name, 
-          work.isTesterWork() ? "test" : work.isAutomatorWork() ? "autom" : "macro", 
-          work.desc]);}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator["return"]) {_iterator["return"]();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
+          task.name, 
+          task.desc || ""]);}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator["return"]) {_iterator["return"]();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
 
 
 
-      if (tbl.length > 0) tbl = [["Name", "Type", "Description"]].concat(tbl);
-      console.log(table(tbl));} }, { key: "runWorks", value: 
-
-
-
+      if (tbl.length > 0) tbl = [["Name", "Description"]].concat(tbl);
+      console.log(table(tbl));} }, { key: "runCatalogedTasks", value: 
 
 
 
 
 
 
-    function runWorks(justojson, calls, opts) {
-      var Loader = require("./Loader");
-      var Runner = require("./Runner");
+
+
+
+    function runCatalogedTasks(justojson, calls, opts) {
+      var Loader = require("justo-loader").Loader;
       var Calls = require("./Calls");
-      var works;
+      var justo;
 
 
       if (!calls || calls.length === 0) calls = ["default"];
@@ -87,7 +87,10 @@ Cli = (function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli
 
 
       justojson = _JustoJson2["default"].read(justojson);
-      works = Loader.loadJustoJs(justojson.runner.main, { only: opts.only });
+      if (opts.hasOwnProperty("only")) justojson.runner.only = opts.only;
+      justo = Loader.loadJusto();
+      justo.initialize(justojson);
+      Loader.load(justojson.runner.main);
 
 
-      Runner.run(Calls.parse(calls, opts), works);} }]);return Cli;})();exports["default"] = Cli;module.exports = exports["default"];
+      justo.runner.runCatalogedTasks(Calls.parse(calls, opts));} }]);return Cli;})();exports["default"] = Cli;module.exports = exports["default"];

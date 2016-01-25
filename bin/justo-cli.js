@@ -34,7 +34,7 @@ opts = yargs
   })
   .option("l", {
     alias: "list",
-    describe: "List the registered works into the Justo.js file.",
+    describe: "List the cataloged tasks into the Justo.js file.",
     type: "boolean",
     default: false
   })
@@ -58,5 +58,5 @@ opts = yargs
 //(3) run
 if (opts.generate) Cli.generateJustoJson("./Justo.json");
 else if (opts.install) Cli.installJusto();
-else if (opts.list) Cli.listRegisteredWorks("./Justo.json");
-else Cli.runWorks("./Justo.json", opts._, {parse: opts.parse, only: opts.only});
+else if (opts.list) Cli.listCatalogedTasks("./Justo.json");
+else Cli.runCatalogedTasks("./Justo.json", opts._, {parse: opts.parse, only: opts.only});

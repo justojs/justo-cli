@@ -22,17 +22,10 @@ module.exports = function(grunt) {
 
       es5: {
         files: {
-          "build/es5/lib/AutomatorWork.js": "lib/AutomatorWork.js",
           "build/es5/lib/Call.js": "lib/Call.js",
           "build/es5/lib/Calls.js": "lib/Calls.js",
           "build/es5/lib/Cli.js": "lib/Cli.js",
-          "build/es5/lib/JustoJson.js": "lib/JustoJson.js",
-          "build/es5/lib/Loader.js": "lib/Loader.js",
-          "build/es5/lib/MacroWork.js": "lib/MacroWork.js",
-          "build/es5/lib/Runner.js": "lib/Runner.js",
-          "build/es5/lib/TesterWork.js": "lib/TesterWork.js",
-          "build/es5/lib/Work.js": "lib/Work.js",
-          "build/es5/lib/Works.js": "lib/Works.js"
+          "build/es5/lib/JustoJson.js": "lib/JustoJson.js"
         }
       }
     },
