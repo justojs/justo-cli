@@ -13,5 +13,5 @@ JustoJs = (function () {function JustoJs() {_classCallCheck(this, JustoJs);}_cre
 
     function generate(file) {
       file = new _justoFs.File(file);
-      file.text = "//imports\nconst register = require(\"justo\").register;\n\n" + 
-      "//tasks\nregister({name: \"default\", desc: \"Default task.\"}, []);";} }]);return JustoJs;})();exports["default"] = JustoJs;module.exports = exports["default"];
+      file.text = "//imports\nconst justo = require(\"justo\");\nconst catalog = justo.catalog;\n\n" + 
+      "//tasks\ncatalog.macro({name: \"default\", desc: \"Default task.\"}, []);";} }]);return JustoJs;})();exports["default"] = JustoJs;module.exports = exports["default"];

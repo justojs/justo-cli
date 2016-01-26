@@ -26,10 +26,11 @@ describe("JustoJs", function() {
       file(DIR.path, "Justo.js").must.exist();
       file(DIR.path, "Justo.js").text.must.be.eq(
         "//imports\n" +
-        "const register = require(\"justo\").register;\n" +
+        "const justo = require(\"justo\");\n" +
+        "const catalog = justo.catalog;\n" +
         "\n" +
         "//tasks\n" +
-        "register({name: \"default\", desc: \"Default task.\"}, []);");
+        "catalog.macro({name: \"default\", desc: \"Default task.\"}, []);");
     });
   });
 });
