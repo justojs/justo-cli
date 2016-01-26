@@ -1,6 +1,6 @@
 {
   "name": "justo-cli",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "The Justo.js CLI.",
   "years": "2015-2016",
   "homepage": "http://www.justojs.org",
@@ -60,8 +60,7 @@
   },
   "files": [
     "bin",
-    "lib",
-    "test"
+    "lib"
   ],
   "scripts": {
     "test": "grunt test"

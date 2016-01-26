@@ -17,10 +17,10 @@ pkg = require("../package.json");
 
 //(2) get arguments
 opts = yargs
-  .usage("Usage: justo [options] [works]")
+  .usage("Usage: justo [options] [tasks]")
   .option("g", {
     alias: "generate",
-    describe: "Generate the Justo.json file in the current directory.",
+    describe: "Generate the Justo.json and Justo.js files in the current directory.",
     type: "boolean",
     default: false
   })
@@ -46,7 +46,7 @@ opts = yargs
   })
   .option("p", {
     alias: "parse",
-    describe: "Parse the work parameters.",
+    describe: "Parse the task parameters.",
     type: "boolean",
     default: false
   })
@@ -56,7 +56,9 @@ opts = yargs
   .argv;
 
 //(3) run
-if (opts.generate) Cli.generateJustoJson("./Justo.json");
-else if (opts.install) Cli.installJusto();
+if (opts.generate) {
+  Cli.generateJustoJson("./Justo.json");
+  Cli.generateJustoJs("./Justo.js");
+} else if (opts.install) Cli.installJusto();
 else if (opts.list) Cli.listCatalogedTasks("./Justo.json");
 else Cli.runCatalogedTasks("./Justo.json", opts._, {parse: opts.parse, only: opts.only});
