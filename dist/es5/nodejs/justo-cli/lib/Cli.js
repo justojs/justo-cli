@@ -2,7 +2,8 @@
 "os");var _os2 = _interopRequireDefault(_os);var _child_process = require(
 "child_process");var _child_process2 = _interopRequireDefault(_child_process);var _JustoJson = require(
 "./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);var _JustoJs = require(
-"./JustoJs");var _JustoJs2 = _interopRequireDefault(_JustoJs);var 
+"./JustoJs");var _JustoJs2 = _interopRequireDefault(_JustoJs);var _PackageJson = require(
+"./PackageJson");var _PackageJson2 = _interopRequireDefault(_PackageJson);var 
 
 
 
@@ -45,7 +46,16 @@ Cli = (function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli
 
 
     function generateJustoJs(path) {
-      _JustoJs2["default"].generate(path);} }, { key: "listCatalogedTasks", value: 
+      _JustoJs2["default"].generate(path);} }, { key: "generatePackageJson", value: 
+
+
+
+
+
+
+
+    function generatePackageJson(path) {
+      _PackageJson2["default"].generate(path);} }, { key: "listCatalogedTasks", value: 
 
 
 

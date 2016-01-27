@@ -20,9 +20,9 @@ opts = yargs
   .usage("Usage: justo [options] [tasks]")
   .option("g", {
     alias: "generate",
-    describe: "Generate the Justo.json and Justo.js files in the current directory.",
-    type: "boolean",
-    default: false
+    describe: "Generate the Justo.json, Justo.js and package.json files in the current directory.",
+    type: "string",
+    choices: ["Justo.js", "justo.js", "Justo.json", "justo.json", "Justo.*", "justo.*", "package.json", "*"]
   })
   .help("h", "Show help.")
   .alias("h", "help")
@@ -52,13 +52,16 @@ opts = yargs
   })
   .version(pkg.version, "v", "Show CLI version.")
   .alias("v", "version")
-  .epilogue(`Bugs: https://github.com/justojs/justo-issues\n\nProudly made with ♥ in Valencia, Spain, EU.\nCopyright (c) ${pkg.years} ${pkg.author.name}.\nIn memory of Justo González Mallols.`)
+  .epilogue(`Bugs: github.com/justojs/justo-issues\n      issues@justojs.org\n\nProudly made with ♥ in Valencia, Spain, EU.\nCopyright (c) ${pkg.years} ${pkg.author.name}.\nIn memory of Justo González Mallols.`)
   .argv;
 
 //(3) run
 if (opts.generate) {
-  Cli.generateJustoJson("./Justo.json");
-  Cli.generateJustoJs("./Justo.js");
+  let file = opts.generate.toLowerCase();
+
+  if (file == "justo.*" || file == "*" || file == "justo.json") Cli.generateJustoJson("./Justo.json");
+  if (file == "justo.*" || file == "*" || file == "justo.js") Cli.generateJustoJs("./Justo.js");
+  if (file == "*" || file == "package.json") Cli.generatePackageJson("./package.json");
 } else if (opts.install) Cli.installJusto();
 else if (opts.list) Cli.listCatalogedTasks("./Justo.json");
 else Cli.runCatalogedTasks("./Justo.json", opts._, {parse: opts.parse, only: opts.only});

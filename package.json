@@ -1,18 +1,18 @@
 {
   "name": "justo-cli",
-  "version": "0.8.1",
+  "version": "0.9.1",
   "description": "The Justo.js CLI.",
   "years": "2015-2016",
   "homepage": "http://www.justojs.org",
   "author": {
-    "name": "The Justo.js Development Group",
-    "email": "justojs.org@outlook.com",
+    "name": "JustoLabs",
+    "email": "justojs@justolabs.com",
     "url": "http://www.justojs.org"
   },
   "contributors": [
     {
       "name": "Raúl G. González",
-      "email": "raulggonzalezsw@outlook.com",
+      "email": "raulggonzalez@justojs.org",
       "url": ""
     }
   ],
@@ -23,7 +23,7 @@
   ],
   "bugs": {
     "url": "https://github.com/justojs/justo-cli/issues",
-    "email": "justojs.org@outlook.com"
+    "email": "issues@justojs.org"
   },
   "repository": {
     "type": "git",
