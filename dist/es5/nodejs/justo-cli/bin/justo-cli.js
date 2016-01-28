@@ -22,7 +22,7 @@ opts = yargs
     alias: "generate",
     describe: "Generate the Justo.json, Justo.js and package.json files in the current directory.",
     type: "string",
-    choices: ["Justo.js", "justo.js", "Justo.json", "justo.json", "Justo.*", "justo.*", "package.json", "*"]
+    choices: ["Justo.js", "justo.js", "Justo.json", "justo.json", "Justo.*", "justo.*", "package.json", "*", "plugin"]
   })
   .help("h", "Show help.")
   .alias("h", "help")
@@ -62,6 +62,7 @@ if (opts.generate) {
   if (file == "justo.*" || file == "*" || file == "justo.json") Cli.generateJustoJson("./Justo.json");
   if (file == "justo.*" || file == "*" || file == "justo.js") Cli.generateJustoJs("./Justo.js");
   if (file == "*" || file == "package.json") Cli.generatePackageJson("./package.json");
+  if (file == "plugin") Cli.generatePluginScaffold();
 } else if (opts.install) Cli.installJusto();
 else if (opts.list) Cli.listCatalogedTasks("./Justo.json");
 else Cli.runCatalogedTasks("./Justo.json", opts._, {parse: opts.parse, only: opts.only});

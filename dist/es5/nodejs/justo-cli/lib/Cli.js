@@ -1,9 +1,7 @@
 "use strict";Object.defineProperty(exports, "__esModule", { value: true });var _createClass = (function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};})();function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { "default": obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var _os = require(
 "os");var _os2 = _interopRequireDefault(_os);var _child_process = require(
 "child_process");var _child_process2 = _interopRequireDefault(_child_process);var _JustoJson = require(
-"./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);var _JustoJs = require(
-"./JustoJs");var _JustoJs2 = _interopRequireDefault(_JustoJs);var _PackageJson = require(
-"./PackageJson");var _PackageJson2 = _interopRequireDefault(_PackageJson);var 
+"./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);var 
 
 
 
@@ -46,7 +44,8 @@ Cli = (function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli
 
 
     function generateJustoJs(path) {
-      _JustoJs2["default"].generate(path);} }, { key: "generatePackageJson", value: 
+      var Generator = require("./JustoJsGenerator");
+      Generator.generate(path);} }, { key: "generatePackageJson", value: 
 
 
 
@@ -55,7 +54,13 @@ Cli = (function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli
 
 
     function generatePackageJson(path) {
-      _PackageJson2["default"].generate(path);} }, { key: "listCatalogedTasks", value: 
+      var Generator = require("./PackageJsonGenerator");
+      Generator.generate(path);} }, { key: "generatePluginScaffold", value: 
+
+
+    function generatePluginScaffold() {
+      var Generator = require("./PluginGenerator");
+      Generator.generate(process.cwd());} }, { key: "listCatalogedTasks", value: 
 
 
 

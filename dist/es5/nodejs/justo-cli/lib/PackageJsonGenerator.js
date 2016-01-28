@@ -5,13 +5,11 @@
 
 
 
-JustoJs = (function () {function JustoJs() {_classCallCheck(this, JustoJs);}_createClass(JustoJs, null, [{ key: "generate", value: 
+PackageJsonGenerator = (function () {function PackageJsonGenerator() {_classCallCheck(this, PackageJsonGenerator);}_createClass(PackageJsonGenerator, null, [{ key: "generate", value: 
 
 
 
 
 
     function generate(file) {
-      file = new _justoFs.File(file);
-      file.text = "//imports\nconst justo = require(\"justo\");\nconst catalog = justo.catalog;\n\n" + 
-      "//tasks\ncatalog.macro({name: \"default\", desc: \"Default task.\"}, []);";} }]);return JustoJs;})();exports["default"] = JustoJs;module.exports = exports["default"];
+      (0, _justoFs.copy)(_path2["default"].join(__dirname, "../template/_package.json"), file);} }]);return PackageJsonGenerator;})();exports["default"] = PackageJsonGenerator;module.exports = exports["default"];

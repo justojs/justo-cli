@@ -15,18 +15,7 @@ JustoJson = (function () {function JustoJson() {_classCallCheck(this, JustoJson)
 
 
     function generate(file) {
-      file = new _justoFs.File(file);
-      file.create();
-      file.json = { 
-        runner: { 
-          main: "Justo.js", 
-          onError: "continue", 
-          logger: { 
-            minLevel: "info", 
-            maxLevel: "fatal" } } };} }, { key: "read", value: 
-
-
-
+      (0, _justoFs.copy)(_path2["default"].join(__dirname, "../template/Justo.json"), file);} }, { key: "read", value: 
 
 
 

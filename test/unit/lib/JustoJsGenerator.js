@@ -3,14 +3,14 @@ const path = require("path");
 const Dir = require("justo-fs").Dir;
 const File = require("justo-fs").File;
 const file = require("justo-assert-fs").file;
-const JustoJs = require("../../../dist/es5/nodejs/justo-cli/lib/JustoJs");
+const Generator = require("../../../dist/es5/nodejs/justo-cli/lib/JustoJsGenerator");
 
 //suite
-describe("JustoJs", function() {
+describe("JustoJsGenerator", function() {
   const DATA_DIR = "test/unit/data";
 
   describe("#generate()", function() {
-    const generate = JustoJs.generate;
+    const generate = Generator.generate;
     const DIR = new Dir(Dir.TMP_DIR, Date.now());
 
     beforeEach(function() {
@@ -24,13 +24,6 @@ describe("JustoJs", function() {
     it("generate(file)", function() {
       generate(path.join(DIR.path, "Justo.js"));
       file(DIR.path, "Justo.js").must.exist();
-      file(DIR.path, "Justo.js").text.must.be.eq(
-        "//imports\n" +
-        "const justo = require(\"justo\");\n" +
-        "const catalog = justo.catalog;\n" +
-        "\n" +
-        "//tasks\n" +
-        "catalog.macro({name: \"default\", desc: \"Default task.\"}, []);");
     });
   });
 });

@@ -5,12 +5,11 @@
 
 
 
-PackageJson = (function () {function PackageJson() {_classCallCheck(this, PackageJson);}_createClass(PackageJson, null, [{ key: "generate", value: 
+JustoJsGenerator = (function () {function JustoJsGenerator() {_classCallCheck(this, JustoJsGenerator);}_createClass(JustoJsGenerator, null, [{ key: "generate", value: 
 
 
 
 
 
     function generate(file) {
-      file = new _justoFs.File(file);
-      file.json = {};} }]);return PackageJson;})();exports["default"] = PackageJson;module.exports = exports["default"];
+      (0, _justoFs.copy)(_path2["default"].join(__dirname, "../template/Justo.js"), file);} }]);return JustoJsGenerator;})();exports["default"] = JustoJsGenerator;module.exports = exports["default"];

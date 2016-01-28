@@ -1,0 +1,34 @@
+{
+  "name": "",
+  "version": "",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "keywords": [
+    "justo-plugin"
+  ],
+  "bugs": {
+    "url": "",
+    "email": ""
+  },
+  "engines": {
+    "node": "",
+    "npm": ""
+  },
+  "dependencies": {},
+  "peerDependencies": {},
+  "devDependencies": {
+    "justo": "*",
+    "justo-assert": "*"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "justo test"
+  }
+}

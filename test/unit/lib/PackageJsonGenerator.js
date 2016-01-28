@@ -1,16 +1,15 @@
 //imports
 const path = require("path");
 const Dir = require("justo-fs").Dir;
-const File = require("justo-fs").File;
 const file = require("justo-assert-fs").file;
-const PackageJson = require("../../../dist/es5/nodejs/justo-cli/lib/PackageJson");
+const Generator = require("../../../dist/es5/nodejs/justo-cli/lib/PackageJsonGenerator");
 
 //suite
 describe("PackageJson", function() {
   const DATA_DIR = "test/unit/data";
 
   describe("#generate()", function() {
-    const generate = PackageJson.generate;
+    const generate = Generator.generate;
     const DIR = new Dir(Dir.TMP_DIR, Date.now());
 
     beforeEach(function() {
