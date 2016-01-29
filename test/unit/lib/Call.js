@@ -1,5 +1,5 @@
 //imports
-const Call = require("../../../dist/es5/nodejs/justo-cli/lib/Call");
+const Call = require("../../../dist/es5/nodejs/justo-cli/lib/Call").default;
 
 //suite
 describe("Call", function() {

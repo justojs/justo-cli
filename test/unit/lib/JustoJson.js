@@ -3,7 +3,7 @@ const path = require("path");
 const Dir = require("justo-fs").Dir;
 const File = require("justo-fs").File;
 const file = require("justo-assert-fs").file;
-const JustoJson = require("../../../dist/es5/nodejs/justo-cli/lib/JustoJson");
+const JustoJson = require("../../../dist/es5/nodejs/justo-cli/lib/JustoJson").default;
 
 //suite
 describe("JustoJson", function() {

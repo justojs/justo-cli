@@ -2,7 +2,7 @@
 const path = require("path");
 const Dir = require("justo-fs").Dir;
 const file = require("justo-assert-fs").file;
-const Generator = require("../../../dist/es5/nodejs/justo-cli/lib/PackageJsonGenerator");
+const Generator = require("../../../dist/es5/nodejs/justo-cli/lib/PackageJsonGenerator").default;
 
 //suite
 describe("PackageJson", function() {

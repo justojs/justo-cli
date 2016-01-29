@@ -5,7 +5,7 @@
 //imports
 const path = require("path");
 const yargs = require("yargs");
-const Cli = require("../lib/Cli.js");
+const Cli = require("../lib/Cli").default;
 
 //////////
 // main //

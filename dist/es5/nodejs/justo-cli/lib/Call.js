@@ -1,16 +1,16 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _createClass = (function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};})();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
+"use strict";var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();Object.defineProperty(exports, "__esModule", { value: true });function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
 
 
 
 
 
-Call = (function () {
+Call = function () {
 
 
 
   function Call(name, params) {_classCallCheck(this, Call);
     Object.defineProperty(this, "name", { value: name, enumerable: true });
-    Object.defineProperty(this, "params", { value: params, enumerable: true });}_createClass(Call, null, [{ key: "parse", value: 
+    Object.defineProperty(this, "params", { value: params, enumerable: true });}_createClass(Call, null, [{ key: "parse", value: function parse(
 
 
 
@@ -19,7 +19,7 @@ Call = (function () {
 
 
 
-    function parse(call, opts) {
+    call, opts) {
       var name, params;
 
 
@@ -46,4 +46,4 @@ Call = (function () {
 
 
 
-      return new Call(name, params);} }]);return Call;})();exports["default"] = Call;module.exports = exports["default"];
+      return new Call(name, params);} }]);return Call;}();exports.default = Call;

@@ -8,6 +8,9 @@ node_js:
   - 5.2
   - 5.3
   - 5.4
+  - 5.5
+os:
+  - linux
 sudo: false
 before_install: npm install -g grunt-cli
 install: npm install

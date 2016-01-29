@@ -1,11 +1,11 @@
 {
   "name": "justo-cli",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "The Justo.js CLI.",
   "years": "2015-2016",
   "homepage": "http://www.justojs.org",
   "author": {
-    "name": "JustoLabs",
+    "name": "Justo Labs",
     "email": "justojs@justolabs.com",
     "url": "http://www.justojs.org"
   },
@@ -39,20 +39,19 @@
     "text-table": "*",
     "yargs": "*"
   },
-  "peerDependencies": {
-
-  },
+  "peerDependencies": {},
   "devDependencies": {
-    "justo-assert": "*",
-    "justo-assert-fs": "*",
-    "mocha": "*",
+    "babel-preset-es2015": "*",
     "grunt": "^0.4.5",
-    "grunt-babel": "^5",
+    "grunt-babel": "*",
     "grunt-contrib-clean": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-jshint": "*",
     "grunt-travis-lint": "*",
-    "grunt-mocha-test": "*"
+    "grunt-mocha-test": "*",
+    "justo-assert": "*",
+    "justo-assert-fs": "*",
+    "mocha": "*"
   },
   "preferGlobal": true,
   "bin": {
@@ -65,6 +64,5 @@
   ],
   "scripts": {
     "test": "grunt test"
-  },
-  "license": "MIT"
+  }
 }

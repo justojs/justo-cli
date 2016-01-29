@@ -3,7 +3,7 @@ const path = require("path");
 const Dir = require("justo-fs").Dir;
 const file = require("justo-assert-fs").file;
 const dir = require("justo-assert-fs").dir;
-const Generator = require("../../../dist/es5/nodejs/justo-cli/lib/PluginGenerator");
+const Generator = require("../../../dist/es5/nodejs/justo-cli/lib/PluginGenerator").default;
 
 //suite
 describe("PluginGenerator", function() {

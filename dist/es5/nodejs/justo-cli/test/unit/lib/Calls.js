@@ -1,5 +1,5 @@
 //imports
-const Calls = require("../../../dist/es5/nodejs/justo-cli/lib/Calls");
+const Calls = require("../../../dist/es5/nodejs/justo-cli/lib/Calls").default;
 
 //suite
 describe("Calls", function() {
@@ -7,7 +7,7 @@ describe("Calls", function() {
     it("parse(calls, opts) - {parse: false}", function() {
       var calls = Calls.parse(["work0", "work1:1", "work2:1:2", "work3:1:two:3"], {parse: false});
 
-      calls.must.be.instanceOf(Calls);
+      calls.must.be.instanceOf(Array);
       calls.length.must.be.eq(4);
 
       calls[0].must.be.instanceOf("Call");
@@ -38,7 +38,7 @@ describe("Calls", function() {
     it("parse(calls, opts) - {parse: true}", function() {
       var calls = Calls.parse(["work0", "work1:1", "work2:1:2", "work3:1:two:3"], {parse: true});
 
-      calls.must.be.instanceOf(Calls);
+      calls.must.be.instanceOf(Array);
       calls.length.must.be.eq(4);
 
       calls[0].must.be.instanceOf("Call");

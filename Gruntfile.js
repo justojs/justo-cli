@@ -17,7 +17,8 @@ module.exports = function(grunt) {
       options: {
         sourceMap: false,
         comments: false,
-        retainLines: true
+        retainLines: true,
+        presets: ["es2015"]
       },
 
       es5: {
