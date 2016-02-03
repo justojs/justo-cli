@@ -29,6 +29,9 @@ describe("PluginGenerator", function() {
       file(dst.path, "README.md").must.exist();
       file(dst.path, "Justo.js").must.exist();
       file(dst.path, "Justo.json").must.exist();
+      file(dst.path, ".editorconfig").must.exist();
+      file(dst.path, ".gitignore").must.exist();
+      file(dst.path, ".jshintrc").must.exist();
       file(dst.path, "lib/op.js").must.exist();
       dir(dst.path, "test").must.exist();
       dir(dst.path, "test/unit/data").must.exist();

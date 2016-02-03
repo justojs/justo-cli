@@ -15,4 +15,7 @@ PluginGenerator = function () {function PluginGenerator() {_classCallCheck(this,
       fs.copy(_path2.default.join(__dirname, "../template/plugin"), dir);
       new fs.Dir(dir, "lib").create();
       new fs.Dir(dir, "test/unit/data").create();
-      fs.rename(dir + "/_package.json", "package.json");} }]);return PluginGenerator;}();exports.default = PluginGenerator;
+      fs.rename(dir + "/_package.json", "package.json");
+      fs.rename(dir + "/_editorconfig", ".editorconfig");
+      fs.rename(dir + "/_gitignore", ".gitignore");
+      fs.rename(dir + "/_jshintrc", ".jshintrc");} }]);return PluginGenerator;}();exports.default = PluginGenerator;
