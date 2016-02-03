@@ -1,3 +1,27 @@
 {
-  
+  "name": "",
+  "version": "",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "",
+    "email": ""
+  },
+  "engines": {
+    "node": "",
+    "npm": ""
+  },
+  "dependencies": {},
+  "peerDependencies": {},
+  "devDependencies": {},
+  "files": [],
+  "scripts": {
+    "test": ""
+  }
 }

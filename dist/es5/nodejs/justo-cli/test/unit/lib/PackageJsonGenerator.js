@@ -23,7 +23,6 @@ describe("PackageJson", function() {
     it("generate(file)", function() {
       generate(path.join(DIR.path, "package.json"));
       file(DIR.path, "package.json").must.exist();
-      file(DIR.path, "package.json").json.must.be.eq({});
     });
   });
 });

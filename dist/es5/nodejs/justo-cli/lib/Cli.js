@@ -6,29 +6,7 @@
 
 
 
-Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli, null, [{ key: "installJusto", value: function installJusto() 
-
-
-
-    {
-      var res, cmd;
-
-
-      if (/^win/.test(_os2.default.platform())) cmd = "npm.cmd";else 
-      cmd = "npm";
-
-
-      console.log("Installing packages...");
-      res = _child_process2.default.spawnSync(cmd, ["install", "--save-dev", "justo"]);
-
-
-      if (res.stdout) console.log(res.stdout.toString());
-      if (res.error) {
-        console.log(res.stderr.toString());
-        console.log(res.error.toString());}} }, { key: "generateJustoJson", value: function generateJustoJson(
-
-
-
+Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli, null, [{ key: "generateJustoJson", value: function generateJustoJson(
 
 
 
