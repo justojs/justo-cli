@@ -20,9 +20,8 @@ opts = yargs
   .usage("Usage: justo [options] [tasks]")
   .option("g", {
     alias: "generate",
-    describe: "Generate the package.json, Justo.json and Justo.js files in the current directory.",
-    type: "string",
-    choices: ["Justo.js", "justo.js", "Justo.json", "justo.json", "Justo.*", "justo.*", "package.json", "plugin"]
+    describe: "Run the specified generator.",
+    type: "string"
   })
   .help("h", "Show help.")
   .alias("h", "help")
@@ -51,12 +50,19 @@ opts = yargs
 
 //(3) run
 if (opts.generate) {
-  let file = opts.generate.toLowerCase();
+  let gen = opts.generate.toLowerCase();
+  let answers = {};
 
-  if (file == "justo.*" || file == "justo.json") Cli.generateJustoJson("./Justo.json");
-  if (file == "justo.*" || file == "justo.js") Cli.generateJustoJs("./Justo.js");
-  if (file == "package.json") Cli.generatePackageJson("./package.json");
-  if (file == "plugin") Cli.generatePluginScaffold();
+  if (gen == "justo" || gen == "justo.*") {
+    Cli.generate("justojson", answers);
+    Cli.generate("justojs", answers);
+  } else {
+      if (gen == "justo.js") gen = "justojs";
+      else if (gen == "justo.json") gen = "justojson";
+      else if (gen == "package.json") gen = "packagejson";
+
+      Cli.generate(gen, answers);
+  }
 } else if (opts.list) {
   Cli.listCatalogedTasks("./Justo.json");
 } else {

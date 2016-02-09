@@ -26,10 +26,7 @@ module.exports = function(grunt) {
           "build/es5/lib/Call.js": "lib/Call.js",
           "build/es5/lib/Calls.js": "lib/Calls.js",
           "build/es5/lib/Cli.js": "lib/Cli.js",
-          "build/es5/lib/JustoJsGenerator.js": "lib/JustoJsGenerator.js",
-          "build/es5/lib/JustoJson.js": "lib/JustoJson.js",
-          "build/es5/lib/PackageJsonGenerator.js": "lib/PackageJsonGenerator.js",
-          "build/es5/lib/PluginGenerator.js": "lib/PluginGenerator.js"
+          "build/es5/lib/JustoJson.js": "lib/JustoJson.js"
         }
       }
     },
@@ -48,10 +45,8 @@ module.exports = function(grunt) {
 
         files: [
           {cwd: "build/es5/", src: ["lib/*.js"], dest: "dist/es5/nodejs/<%= pkg.name %>/", expand: true},
-          {src: ["template/**"], dest: "dist/es5/nodejs/<%= pkg.name %>/", expand: true},
           {src: ["bin/justo-cli.js"], dest: "dist/es5/nodejs/<%= pkg.name %>/", expand: true},
-          {src: ["package.json", "README.md"], dest: "dist/es5/nodejs/<%= pkg.name %>/", expand: true},
-          {src: ["test/**/*.*"], dest: "dist/es5/nodejs/<%= pkg.name %>", expand: true}
+          {src: ["package.json", "README.md"], dest: "dist/es5/nodejs/<%= pkg.name %>/", expand: true}
         ]
       }
     },

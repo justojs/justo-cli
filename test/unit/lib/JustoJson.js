@@ -39,32 +39,4 @@ describe("JustoJson", function() {
       });
     });
   });
-
-  describe("#generate()", function() {
-    const generate = JustoJson.generate;
-    const DIR = new Dir(Dir.TMP_DIR, Date.now());
-
-    beforeEach(function() {
-      DIR.create();
-    });
-
-    afterEach(function() {
-      DIR.remove();
-    });
-
-    it("generate(file)", function() {
-      generate(path.join(DIR.path, "Justo.json"));
-      file(DIR.path, "Justo.json").must.exist();
-      file(DIR.path, "Justo.json").json.must.be.eq({
-        runner: {
-          main: "Justo.js",
-          onError: "continue",
-          logger: {
-            minLevel: "info",
-            maxLevel: "fatal"
-          }
-        }
-      });
-    });
-  });
 });

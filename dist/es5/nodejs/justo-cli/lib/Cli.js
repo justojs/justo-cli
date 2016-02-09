@@ -1,4 +1,4 @@
-"use strict";var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();Object.defineProperty(exports, "__esModule", { value: true });var _os = require("os");var _os2 = _interopRequireDefault(_os);var _child_process = require("child_process");var _child_process2 = _interopRequireDefault(_child_process);var _JustoJson = require("./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _os = require("os");var _os2 = _interopRequireDefault(_os);var _path = require("path");var _path2 = _interopRequireDefault(_path);var _child_process = require("child_process");var _child_process2 = _interopRequireDefault(_child_process);var _JustoJson = require("./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
 
 
 
@@ -6,39 +6,34 @@
 
 
 
-Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli, null, [{ key: "generateJustoJson", value: function generateJustoJson(
 
-
-
-
-
-    path) {
-      _JustoJson2.default.generate(path);} }, { key: "generateJustoJs", value: function generateJustoJs(
+Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli, null, [{ key: "generate", value: function generate(
 
 
 
 
 
 
-
-    path) {
-      var Generator = require("./JustoJsGenerator").default;
-      Generator.generate(path);} }, { key: "generatePackageJson", value: function generatePackageJson(
-
+    name, responses) {
+      var pkg = "justo-generator-" + name;
+      var gen;
 
 
+      try {
+        var Class = require(pkg);
+        gen = new Class({}, responses);} 
+      catch (e) {
+        if (/^Cannot find module/.test(e.message)) {
+          throw new Error("The generator is not installed. Please, install it using 'npm install -g " + pkg + "'.");} else 
+        {
+          throw e;}}
 
 
 
-
-    path) {
-      var Generator = require("./PackageJsonGenerator").default;
-      Generator.generate(path);} }, { key: "generatePluginScaffold", value: function generatePluginScaffold() 
+      if (!gen.src) gen.src = _path2.default.join(_path2.default.dirname(require.resolve(pkg)), "template");
 
 
-    {
-      var Generator = require("./PluginGenerator").default;
-      Generator.generate(process.cwd());} }, { key: "listCatalogedTasks", value: function listCatalogedTasks(
+      gen.run();} }, { key: "listCatalogedTasks", value: function listCatalogedTasks(
 
 
 
