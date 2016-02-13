@@ -17,33 +17,43 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
     name, params, opts) {
-      var pkg = "justo-generator-" + name;
-      var gen, answers;
+      var gen, cmd, answers;
 
 
       answers = {};var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
 
         for (var _iterator = params[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var p = _step.value;
-
           if (/^.+:.*$/.test(p)) {var _ParamParser$parse = 
             _ParamParser2.default.parse(p, opts);var _ParamParser$parse2 = _slicedToArray(_ParamParser$parse, 2);var _name = _ParamParser$parse2[0];var value = _ParamParser$parse2[1];
-            answers[_name] = value;}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
+            answers[_name] = value;} else 
+          {
+            if (cmd) cmd += " " + p;else 
+            cmd = p;}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
 
 
 
 
       try {
-        var Class = require(pkg);
-        gen = new Class({}, answers);} 
+        var Class = undefined, pkg = undefined, pkgName = undefined;
+
+
+        pkgName = "justo-generator-" + name;
+
+
+        pkg = require(pkgName);
+
+        if (cmd) Class = pkg[cmd];else 
+        Class = pkg instanceof Function ? pkg : pkg.default;
+
+        gen = new Class({}, answers);
+        if (!gen.src) gen.src = _path2.default.join(_path2.default.dirname(require.resolve(pkgName)), "template");} 
       catch (e) {
         if (/^Cannot find module/.test(e.message)) {
-          throw new Error("The generator is not installed. Please, install it using 'npm install -g " + pkg + "'.");} else 
+          throw new Error("The generator is not installed. Please, install it using 'npm install -g justo-generator-" + name + "'.");} else 
         {
           throw e;}}
 
 
-
-      if (!gen.src) gen.src = _path2.default.join(_path2.default.dirname(require.resolve(pkg)), "template");
 
 
       gen.run();} }, { key: "listCatalogedTasks", value: function listCatalogedTasks(
