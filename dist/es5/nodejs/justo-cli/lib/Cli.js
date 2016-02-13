@@ -25,7 +25,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
         for (var _iterator = params[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var p = _step.value;
           if (/^.+:.*$/.test(p)) {var _ParamParser$parse = 
             _ParamParser2.default.parse(p, opts);var _ParamParser$parse2 = _slicedToArray(_ParamParser$parse, 2);var _name = _ParamParser$parse2[0];var value = _ParamParser$parse2[1];
-            answers[_name] = value;} else 
+            answers[_name] = value.length == 1 ? value[0] : value;} else 
           {
             if (cmd) cmd += " " + p;else 
             cmd = p;}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
