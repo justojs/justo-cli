@@ -26,7 +26,8 @@ module.exports = function(grunt) {
           "build/es5/lib/Call.js": "lib/Call.js",
           "build/es5/lib/Calls.js": "lib/Calls.js",
           "build/es5/lib/Cli.js": "lib/Cli.js",
-          "build/es5/lib/JustoJson.js": "lib/JustoJson.js"
+          "build/es5/lib/JustoJson.js": "lib/JustoJson.js",
+          "build/es5/lib/ParamParser.js": "lib/ParamParser.js"
         }
       }
     },

@@ -1,4 +1,5 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _os = require("os");var _os2 = _interopRequireDefault(_os);var _path = require("path");var _path2 = _interopRequireDefault(_path);var _child_process = require("child_process");var _child_process2 = _interopRequireDefault(_child_process);var _JustoJson = require("./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _os = require("os");var _os2 = _interopRequireDefault(_os);var _path = require("path");var _path2 = _interopRequireDefault(_path);var _child_process = require("child_process");var _child_process2 = _interopRequireDefault(_child_process);var _JustoJson = require("./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);var _ParamParser = require("./ParamParser");var _ParamParser2 = _interopRequireDefault(_ParamParser);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
+
 
 
 
@@ -14,14 +15,26 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
 
-    name, responses) {
+
+    name, params, opts) {
       var pkg = "justo-generator-" + name;
-      var gen;
+      var gen, answers;
+
+
+      answers = {};var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
+
+        for (var _iterator = params[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var p = _step.value;
+
+          if (/^.+:.*$/.test(p)) {var _ParamParser$parse = 
+            _ParamParser2.default.parse(p, opts);var _ParamParser$parse2 = _slicedToArray(_ParamParser$parse, 2);var _name = _ParamParser$parse2[0];var value = _ParamParser$parse2[1];
+            answers[_name] = value;}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
+
+
 
 
       try {
         var Class = require(pkg);
-        gen = new Class({}, responses);} 
+        gen = new Class({}, answers);} 
       catch (e) {
         if (/^Cannot find module/.test(e.message)) {
           throw new Error("The generator is not installed. Please, install it using 'npm install -g " + pkg + "'.");} else 
@@ -53,13 +66,13 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
       Loader.load(config.runner.main);
 
 
-      tbl = [];var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
-        for (var _iterator = Object.keys(justo.runner.catalog.tasks).sort()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var name = _step.value;
+      tbl = [];var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
+        for (var _iterator2 = Object.keys(justo.runner.catalog.tasks).sort()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var name = _step2.value;
           var task = justo.runner.catalog.get(name).__task__;
 
           tbl.push([
           task.name, 
-          task.desc || ""]);}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
+          task.desc || ""]);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
 
 
 

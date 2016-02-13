@@ -17,7 +17,7 @@ pkg = require("../package.json");
 
 //(2) get arguments
 opts = yargs
-  .usage("Usage: justo [options] [tasks]")
+  .usage("\nUsage: justo [options] [tasks]\n       justo -g generator [parameters]")
   .option("g", {
     alias: "generate",
     describe: "Run the specified generator.",
@@ -51,17 +51,17 @@ opts = yargs
 //(3) run
 if (opts.generate) {
   let gen = opts.generate.toLowerCase();
-  let answers = {};
+  let params = opts._;
 
   if (gen == "justo" || gen == "justo.*") {
-    Cli.generate("justojson", answers);
-    Cli.generate("justojs", answers);
+    Cli.generate("justojson", params);
+    Cli.generate("justojs", params);
   } else {
       if (gen == "justo.js") gen = "justojs";
       else if (gen == "justo.json") gen = "justojson";
       else if (gen == "package.json") gen = "packagejson";
 
-      Cli.generate(gen, answers);
+      Cli.generate(gen, params, {parse: opts.parse});
   }
 } else if (opts.list) {
   Cli.listCatalogedTasks("./Justo.json");
