@@ -17,7 +17,12 @@ pkg = require("../package.json");
 
 //(2) get arguments
 opts = yargs
-  .usage("\nUsage: justo [options] [tasks]\n       justo -g generator [command] [parameters]")
+  .usage(
+    "\nUsage:" +
+    "\n  justo [options] [tasks]" +
+    "\n  justo -g generator [command] [parameters]" +
+    "\n  justo -g generator help [command]"
+  )
   .option("g", {
     alias: "generate",
     describe: "Run the specified generator.",

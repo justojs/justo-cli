@@ -17,19 +17,24 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
     name, params, opts) {
-      var gen, cmd, answers;
+      var gen, cmd, answers, help;
 
 
       answers = {};var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
 
         for (var _iterator = params[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var p = _step.value;
           if (/^.+:.*$/.test(p)) {var _ParamParser$parse = 
-            _ParamParser2.default.parse(p, opts);var _ParamParser$parse2 = _slicedToArray(_ParamParser$parse, 2);var _name = _ParamParser$parse2[0];var value = _ParamParser$parse2[1];
-            answers[_name] = value.length == 1 ? value[0] : value;} else 
+            _ParamParser2.default.parse(p, opts);var _ParamParser$parse2 = _slicedToArray(_ParamParser$parse, 2);var _name3 = _ParamParser$parse2[0];var value = _ParamParser$parse2[1];
+            answers[_name3] = value.length == 1 ? value[0] : value;} else 
           {
             if (cmd) cmd += " " + p;else 
             cmd = p;}}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
 
+
+
+      if (/^help ?/.test(cmd)) {
+        help = true;
+        cmd = cmd.replace(/^help ?/, "");}
 
 
 
@@ -38,9 +43,8 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
         pkgName = "justo-generator-" + name;
-
-
         pkg = require(pkgName);
+
 
         if (cmd) Class = pkg[cmd];else 
         Class = pkg instanceof Function ? pkg : pkg.default;
@@ -56,7 +60,48 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
 
-      gen.run();} }, { key: "listCatalogedTasks", value: function listCatalogedTasks(
+      if (help) showHelp(gen);else 
+      gen.run();
+
+
+      function showHelp(gen) {
+        var table = require("text-table");
+        var help = gen.help;
+
+
+        if (help.desc) {
+          console.log("Description:");
+          console.log(" ", help.desc);}
+
+
+
+        if (help.params) {
+          var tbl = [["  Name", "Description"]];
+
+          console.log("\nParameters:");var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
+
+            for (var _iterator2 = Object.keys(help.params).sort()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var _name = _step2.value;
+              tbl.push(["  " + _name, help.params[_name]]);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
+
+
+          console.log(table(tbl));}
+
+
+        if (help.commands) {
+          var tbl = [["  Name", "Description"]];
+          var names = Object.keys(help.commands);
+
+          if (names.length > 0) {
+            console.log("\nCommands:");var _iteratorNormalCompletion3 = true;var _didIteratorError3 = false;var _iteratorError3 = undefined;try {
+
+              for (var _iterator3 = names.sort()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {var _name2 = _step3.value;
+                tbl.push(["  " + _name2, help.commands[_name2]]);}} catch (err) {_didIteratorError3 = true;_iteratorError3 = err;} finally {try {if (!_iteratorNormalCompletion3 && _iterator3.return) {_iterator3.return();}} finally {if (_didIteratorError3) {throw _iteratorError3;}}}
+
+
+            console.log(table(tbl));}}}} }, { key: "listCatalogedTasks", value: function listCatalogedTasks(
+
+
+
 
 
 
@@ -76,13 +121,13 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
       Loader.load(config.runner.main);
 
 
-      tbl = [];var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
-        for (var _iterator2 = Object.keys(justo.runner.catalog.tasks).sort()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var name = _step2.value;
+      tbl = [];var _iteratorNormalCompletion4 = true;var _didIteratorError4 = false;var _iteratorError4 = undefined;try {
+        for (var _iterator4 = Object.keys(justo.runner.catalog.tasks).sort()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {var name = _step4.value;
           var task = justo.runner.catalog.get(name).__task__;
 
           tbl.push([
           task.name, 
-          task.desc || ""]);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
+          task.desc || ""]);}} catch (err) {_didIteratorError4 = true;_iteratorError4 = err;} finally {try {if (!_iteratorNormalCompletion4 && _iterator4.return) {_iterator4.return();}} finally {if (_didIteratorError4) {throw _iteratorError4;}}}
 
 
 
