@@ -48,26 +48,14 @@ opts = yargs
     type: "boolean",
     default: false
   })
-  .version(pkg.version, "v", "Show CLI version.")
+  .version("v", "Show CLI version.", pkg.version)
   .alias("v", "version")
   .epilogue(`Bugs: github.com/justojs/justo-issues\n      issues@justojs.org\n\nProudly made with ♥ in Valencia, Spain, EU.\nCopyright (c) ${pkg.years} ${pkg.author.name}.\nIn memory of Justo González Mallols.`)
   .argv;
 
 //(3) run
 if (opts.generate) {
-  let gen = opts.generate.toLowerCase();
-  let params = opts._;
-
-  if (gen == "justo" || gen == "justo.*") {
-    Cli.generate("justojson", params);
-    Cli.generate("justojs", params);
-  } else {
-      if (gen == "justo.js") gen = "justojs";
-      else if (gen == "justo.json") gen = "justojson";
-      else if (gen == "package.json") gen = "packagejson";
-
-      Cli.generate(gen, params, {parse: opts.parse});
-  }
+  Cli.generate(opts.generate.toLowerCase(), opts._, {parse: opts.parse});
 } else if (opts.list) {
   Cli.listCatalogedTasks("./Justo.json");
 } else {
