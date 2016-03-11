@@ -1,9 +1,9 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _os = require("os");var _os2 = _interopRequireDefault(_os);var _path = require("path");var _path2 = _interopRequireDefault(_path);var _child_process = require("child_process");var _child_process2 = _interopRequireDefault(_child_process);var _JustoJson = require("./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);var _ParamParser = require("./ParamParser");var _ParamParser2 = _interopRequireDefault(_ParamParser);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
-
-
-
-
-
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+var _os = require("os");var _os2 = _interopRequireDefault(_os);
+var _path = require("path");var _path2 = _interopRequireDefault(_path);
+var _child_process = require("child_process");var _child_process2 = _interopRequireDefault(_child_process);
+var _JustoJson = require("./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);
+var _ParamParser = require("./ParamParser");var _ParamParser2 = _interopRequireDefault(_ParamParser);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
 
 
 
@@ -17,7 +17,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
     name, params, opts) {
-      var gen, cmd, answers, help;
+      var cmd, answers, help, pkg, pkgName;
 
 
       answers = {};var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
@@ -39,34 +39,34 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
       try {
-        var Class = undefined, pkg = undefined, pkgName = undefined;
-
-
         pkgName = "justo-generator-" + name;
-        pkg = require(pkgName);
-
-
-        if (cmd) Class = pkg[cmd];else 
-        Class = pkg instanceof Function ? pkg : pkg.default;
-
-        gen = new Class({}, answers);
-        if (!gen.src) gen.src = _path2.default.join(_path2.default.dirname(require.resolve(pkgName)), "template");} 
+        pkg = require(pkgName);} 
       catch (e) {
         if (/^Cannot find module/.test(e.message)) {
-          throw new Error("The generator is not installed. Please, install it using 'npm install -g justo-generator-" + name + "'.");} else 
+          throw new Error("The generator is not installed. Please, install it using 'npm install -g " + pkgName + "'.");} else 
         {
           throw e;}}
 
 
 
 
-      if (help) showHelp(gen);else 
-      gen.run();
+      if (help) showHelp();else 
+      run();
 
 
-      function showHelp(gen) {
+      function showHelp() {
+        if (cmd) showGeneratorHelp(pkg[cmd]);else 
+        if (pkg instanceof Function) showGeneratorHelp(pkg);else 
+        showPackageHelp(pkg);}
+
+
+      function showGeneratorHelp(Class) {
         var table = require("text-table");
-        var help = gen.help;
+        var gen, help;
+
+
+        gen = new Class({}, {});
+        help = gen.help;
 
 
         if (help.desc) {
@@ -76,31 +76,58 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
         if (help.params) {
-          var tbl = [["  Name", "Description"]];
-
-          console.log("\nParameters:");var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
-
-            for (var _iterator2 = Object.keys(help.params).sort()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var _name = _step2.value;
-              tbl.push(["  " + _name, help.params[_name]]);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
-
-
-          console.log(table(tbl));}
-
-
-        if (help.commands) {
-          var tbl = [["  Name", "Description"]];
-          var names = Object.keys(help.commands);
+          var names = Object.keys(help.params);
 
           if (names.length > 0) {
-            console.log("\nCommands:");var _iteratorNormalCompletion3 = true;var _didIteratorError3 = false;var _iteratorError3 = undefined;try {
+            var tbl = [["  Name", "Description"]];var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
 
-              for (var _iterator3 = names.sort()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {var _name2 = _step3.value;
-                tbl.push(["  " + _name2, help.commands[_name2]]);}} catch (err) {_didIteratorError3 = true;_iteratorError3 = err;} finally {try {if (!_iteratorNormalCompletion3 && _iterator3.return) {_iterator3.return();}} finally {if (_didIteratorError3) {throw _iteratorError3;}}}
-
-
-            console.log(table(tbl));}}}} }, { key: "listCatalogedTasks", value: function listCatalogedTasks(
+              for (var _iterator2 = names.sort()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var _name = _step2.value;
+                tbl.push(["  " + _name, help.params[_name]]);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
 
 
+            console.log("\nParameters:");
+            console.log(table(tbl));}}}
+
+
+
+
+      function showPackageHelp(pkg) {
+        var table = require("text-table");
+
+
+        if (pkg.default) showGeneratorHelp(pkg.default);
+
+
+        var names = Object.keys(pkg);
+
+        if (names.length > 1) {
+          var tbl = [["  Name", "Description"]];var _iteratorNormalCompletion3 = true;var _didIteratorError3 = false;var _iteratorError3 = undefined;try {
+
+            for (var _iterator3 = names.sort()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {var _name2 = _step3.value;
+              if (_name2 != "default") {
+                var gen = new pkg[_name2]({}, {});
+                tbl.push(["  " + _name2, gen.help.desc || ""]);}}} catch (err) {_didIteratorError3 = true;_iteratorError3 = err;} finally {try {if (!_iteratorNormalCompletion3 && _iterator3.return) {_iterator3.return();}} finally {if (_didIteratorError3) {throw _iteratorError3;}}}
+
+
+
+          console.log("\nCommands (use 'help command' for more info):");
+          console.log(table(tbl));}}
+
+
+
+      function run() {
+        var Class, gen;
+
+
+        if (cmd) Class = pkg[cmd];else 
+        Class = pkg instanceof Function ? pkg : pkg.default;
+
+
+        gen = new Class({}, answers);
+        if (!gen.src) gen.src = _path2.default.join(_path2.default.dirname(require.resolve(pkgName)), "template");
+
+
+        gen.run();}} }, { key: "listCatalogedTasks", value: function listCatalogedTasks(
 
 
 
