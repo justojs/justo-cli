@@ -79,10 +79,24 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
           var names = Object.keys(help.params);
 
           if (names.length > 0) {
-            var tbl = [["  Name", "Description"]];var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
+            var tbl = [["  Name", "Type", "Description", "Choices"]];var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
 
               for (var _iterator2 = names.sort()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var _name = _step2.value;
-                tbl.push(["  " + _name, help.params[_name]]);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
+                var param = undefined, type = undefined, title = undefined, choices = undefined;
+
+                param = help.params[_name];
+
+                if (typeof param == "string") {
+                  type = "String";
+                  title = param;
+                  choices = "";} else 
+                {
+                  type = param.type || "String";
+                  title = param.title || "";
+                  choices = param.choices ? param.choices.join(", ") : "";}
+
+
+                tbl.push(["  " + _name, type, title, choices]);}} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
 
 
             console.log("\nParameters:");
