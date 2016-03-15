@@ -137,7 +137,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
         Class = pkg instanceof Function ? pkg : pkg.default;
 
 
-        gen = new Class({}, answers);
+        gen = new Class({ mute: opts.mute }, answers);
         if (!gen.src) gen.src = _path2.default.join(_path2.default.dirname(require.resolve(pkgName)), "template");
 
 

@@ -20,8 +20,8 @@ opts = yargs
   .usage(
     "\nUsage:" +
     "\n  justo [options] [tasks]" +
-    "\n  justo -g generator [command] [parameters]" +
-    "\n  justo -g generator help [command]"
+    "\n  justo [-m] -g generator [command] [parameters]" +
+    "\n  justo [-m] -g generator help [command]"
   )
   .option("g", {
     alias: "generate",
@@ -48,6 +48,12 @@ opts = yargs
     type: "boolean",
     default: false
   })
+  .option("m", {
+    alias: "mute",
+    describe: "Mute the reporter.",
+    type: "boolean",
+    default: false
+  })
   .version("v", "Show CLI version.", pkg.version)
   .alias("v", "version")
   .epilogue(`Bugs: github.com/justojs/justo-issues\n      issues@justojs.org\n\nProudly made with ♥ in Valencia, Spain, EU.\nCopyright (c) ${pkg.years} ${pkg.author.name}.\nIn memory of Justo González Mallols.`)
@@ -55,7 +61,7 @@ opts = yargs
 
 //(3) run
 if (opts.generate) {
-  Cli.generate(opts.generate.toLowerCase(), opts._, {parse: opts.parse});
+  Cli.generate(opts.generate.toLowerCase(), opts._, {parse: opts.parse, mute: opts.mute});
 } else if (opts.list) {
   Cli.listCatalogedTasks("./Justo.json");
 } else {
