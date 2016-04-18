@@ -82,7 +82,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
             var tbl = [["  Name", "Type", "Description", "Choices"]];var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
 
               for (var _iterator2 = names.sort()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var _name = _step2.value;
-                var param = undefined, type = undefined, title = undefined, choices = undefined;
+                var param = void 0, type = void 0, title = void 0, choices = void 0;
 
                 param = help.params[_name];
 
@@ -183,6 +183,8 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
 
+
+
     justojson, calls, opts) {
       var Loader = require("justo-loader").Loader;
       var Calls = require("./Calls").default;
@@ -200,4 +202,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
       Loader.load(justojson.runner.main);
 
 
-      justo.runner.runCatalogedTasks(Calls.parse(calls, opts));} }]);return Cli;}();exports.default = Cli;
+      justo.runner.runCatalogedTasks(Calls.parse(calls, opts));
+
+
+      return { state: justo.runner.state };} }]);return Cli;}();exports.default = Cli;

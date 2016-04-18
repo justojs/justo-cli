@@ -72,5 +72,6 @@ if (opts.issue) {
 } else if (opts.list) {
   Cli.listCatalogedTasks("./Justo.json");
 } else {
-  Cli.runCatalogedTasks("./Justo.json", opts._, {parse: opts.parse, only: opts.only});
+  var res = Cli.runCatalogedTasks("./Justo.json", opts._, {parse: opts.parse, only: opts.only});
+  if (res.state.name == "FAILED") process.exit(1);
 }

@@ -1,6 +1,6 @@
 {
   "name": "justo-cli",
-  "version": "0.14.2",
+  "version": "0.14.3",
   "description": "The Justo.js CLI.",
   "years": "2015-2016",
   "homepage": "http://www.justojs.org",
@@ -42,7 +42,7 @@
   "peerDependencies": {},
   "devDependencies": {
     "babel-preset-es2015": "*",
-    "grunt": "^0.4.5",
+    "grunt": "*",
     "grunt-babel": "*",
     "grunt-contrib-clean": "*",
     "grunt-contrib-copy": "*",
