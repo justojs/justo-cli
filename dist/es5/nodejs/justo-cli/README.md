@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/justojs/justo-cli.svg)](https://travis-ci.org/justojs/justo-cli)
+[![Dependency Status](https://david-dm.org/justojs/justo-cli.svg)](https://david-dm.org/justojs/justo-cli)
+[![devDependency Status](https://david-dm.org/justojs/justo-cli/dev-status.svg)](https://david-dm.org/justojs/justo-cli#info=devDependencies)
 
 The Justo.js CLI.
 

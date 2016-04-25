@@ -30,8 +30,8 @@ opts = yargs
   })
   .help("h", "Show help.")
   .alias("h", "help")
-  .option("l", {
-    alias: "list",
+  .option("c", {
+    alias: "catalog",
     describe: "List the cataloged tasks into the Justo.js file.",
     type: "boolean",
     default: false
@@ -44,12 +44,6 @@ opts = yargs
   .option("o", {
     alias: "only",
     describe: "Only run suites and tests fixed as only.",
-    type: "boolean",
-    default: false
-  })
-  .option("p", {
-    alias: "parse",
-    describe: "Parse the task parameters.",
     type: "boolean",
     default: false
   })
@@ -68,10 +62,10 @@ opts = yargs
 if (opts.issue) {
   console.log("Web: https://github.com/justojs/justo-issues\nEmail: issues@justojs.org");
 } else if (opts.generate) {
-  Cli.generate(opts.generate.toLowerCase(), opts._, {parse: opts.parse, mute: opts.mute});
-} else if (opts.list) {
+  Cli.generate(opts.generate.toLowerCase(), opts._, {mute: opts.mute});
+} else if (opts.catalog) {
   Cli.listCatalogedTasks("./Justo.json");
 } else {
-  var res = Cli.runCatalogedTasks("./Justo.json", opts._, {parse: opts.parse, only: opts.only});
+  var res = Cli.runCatalogedTasks("./Justo.json", opts._, {only: opts.only});
   if (res.state.name == "FAILED") process.exit(1);
 }

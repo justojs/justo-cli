@@ -192,7 +192,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
       if (!calls || calls.length === 0) calls = ["default"];
-      if (!opts) opts = { parse: false, only: false };
+      if (!opts) opts = { only: false };
 
 
       justojson = _JustoJson2.default.read(justojson);

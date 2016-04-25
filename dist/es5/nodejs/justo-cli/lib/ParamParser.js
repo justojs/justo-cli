@@ -12,26 +12,15 @@
       var name, value;
 
 
+      if (!opts) opts = {};
+
+
       if (line.indexOf(":") < 0) {
         name = line;
         value = [];} else 
       {
         name = line.substr(0, line.indexOf(":"));
-        value = line.split(":").slice(1);
-
-        if (opts.parse) {
-          for (var i = 0; i < value.length; ++i) {
-            var item = value[i];
-
-            if (isNaN(Number(item))) {
-              if (/^['"].*['"]$/.test(item)) item = item.replace(/['"]/, "");} else 
-            {
-              item = Number(item);}
-
-
-            value[i] = item;}}}
-
-
+        value = line.split(":").slice(1);}
 
 
 

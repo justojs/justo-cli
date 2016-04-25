@@ -11,6 +11,7 @@ node_js:
   - 5.8
   - 5.9
   - 5.10
+  - 5.11
 os:
   - linux
 sudo: false

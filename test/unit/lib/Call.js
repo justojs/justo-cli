@@ -15,18 +15,8 @@ describe("Call", function() {
 
   describe("#parse()", function() {
     describe("work", function() {
-      it("parse(call, opts) - {parse: false}", function() {
-        var call = Call.parse("work", {parse: false});
-
-        call.must.be.instanceOf(Call);
-        call.must.have({
-          name: "work",
-          params: []
-        });
-      });
-
-      it("parse(call, opts) - {parse: true}", function() {
-        var call = Call.parse("work", {parse: true});
+      it("parse(call, opts) - {}", function() {
+        var call = Call.parse("work", {});
 
         call.must.be.instanceOf(Call);
         call.must.have({
@@ -37,8 +27,8 @@ describe("Call", function() {
     });
 
     describe("work:param", function() {
-      it("parse(call, opts) - {parse: false}", function() {
-        var call = Call.parse("work:1", {parse: false});
+      it("parse(call, opts) - {}", function() {
+        var call = Call.parse("work:1", {});
 
         call.must.be.instanceOf(Call);
         call.must.have({
@@ -46,36 +36,16 @@ describe("Call", function() {
           params: ["1"]
         });
       });
-
-      it("parse(call, opts) - {parse: true}", function() {
-        var call = Call.parse("work:1", {parse: true});
-
-        call.must.be.instanceOf(Call);
-        call.must.have({
-          name: "work",
-          params: [1]
-        });
-      });
     });
 
     describe("work:param:param", function() {
-      it("parse(call, opts) - {parse: false}", function() {
+      it("parse(call, opts) - {}", function() {
         var call = Call.parse("work:1:two:3", {parse: false});
 
         call.must.be.instanceOf(Call);
         call.must.have({
           name: "work",
           params: ["1", "two", "3"]
-        });
-      });
-
-      it("parse(call, opts) -  {parse: true}", function() {
-        var call = Call.parse("work:1:two:3", {parse: true});
-
-        call.must.be.instanceOf(Call);
-        call.must.have({
-          name: "work",
-          params: [1, "two", 3]
         });
       });
     });
