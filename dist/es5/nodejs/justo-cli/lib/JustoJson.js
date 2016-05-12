@@ -26,8 +26,7 @@ JustoJson = function () {function JustoJson() {_classCallCheck(this, JustoJson);
       config.runner.main = _path2.default.normalize(config.runner.main);
       if (!config.runner.onError) config.runner.onError = "continue";
 
-      if (!config.automator) config.automator = {};
-      if (!config.tester) config.tester = {};
+      if (!config.reporter) config.reporter = { type: "coloredConsole" };
 
 
       return config;} }, { key: "config", get: function get() 

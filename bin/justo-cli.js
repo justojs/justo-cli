@@ -23,6 +23,12 @@ opts = yargs
     "\n  justo [-m] -g generator [command] [parameters]" +
     "\n  justo [-m] -g generator help [command]"
   )
+  .option("c", {
+    alias: "catalog",
+    describe: "List the cataloged tasks into the Justo.js file.",
+    type: "boolean",
+    default: false
+  })
   .option("g", {
     alias: "generate",
     describe: "Run the specified generator.",
@@ -30,26 +36,20 @@ opts = yargs
   })
   .help("h", "Show help.")
   .alias("h", "help")
-  .option("c", {
-    alias: "catalog",
-    describe: "List the cataloged tasks into the Justo.js file.",
-    type: "boolean",
-    default: false
-  })
   .option("issue", {
     describe: "Show how to notify an issue.",
-    type: "boolean",
-    default: false
-  })
-  .option("o", {
-    alias: "only",
-    describe: "Only run suites and tests fixed as only.",
     type: "boolean",
     default: false
   })
   .option("m", {
     alias: "mute",
     describe: "Mute the reporter.",
+    type: "boolean",
+    default: false
+  })
+  .option("o", {
+    alias: "only",
+    describe: "Only run suites and tests fixed as only.",
     type: "boolean",
     default: false
   })
