@@ -2,8 +2,9 @@
 var _os = require("os");var _os2 = _interopRequireDefault(_os);
 var _path = require("path");var _path2 = _interopRequireDefault(_path);
 var _child_process = require("child_process");var _child_process2 = _interopRequireDefault(_child_process);
+var _justoFs = require("justo-fs");var fs = _interopRequireWildcard(_justoFs);
 var _JustoJson = require("./JustoJson");var _JustoJson2 = _interopRequireDefault(_JustoJson);
-var _ParamParser = require("./ParamParser");var _ParamParser2 = _interopRequireDefault(_ParamParser);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
+var _ParamParser = require("./ParamParser");var _ParamParser2 = _interopRequireDefault(_ParamParser);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var 
 
 
 
@@ -186,7 +187,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
     justojson, calls, opts) {
-      var Loader = require("justo-loader").Loader;
+      var Loader = require(_path2.default.join(process.cwd(), "node_modules/justo-loader")).Loader;
       var Calls = require("./Calls").default;
       var justo;
 
@@ -205,4 +206,55 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
       justo.runner.runCatalogedTasks(Calls.parse(calls, opts));
 
 
-      return { state: justo.runner.state };} }]);return Cli;}();exports.default = Cli;
+      return { state: justo.runner.state };} }, { key: "downloadAndRunCatalogedTasks", value: function downloadAndRunCatalogedTasks(
+
+
+
+
+
+
+
+
+
+
+
+    src, dir, justojson, calls, opts) {
+      var download = require("justo-download");
+      var sync = require("justo-sync");
+      var unzip = require("justo-unzip");
+      var url = require("url");
+      var zip = _path2.default.basename(url.parse(src).path);
+      var res;
+
+
+      sync(function (done) {
+        console.log("  Downloading " + src + "...");
+        download(src, process.cwd(), done);});
+
+
+
+      sync(function (done) {
+        console.log("  Unzipping " + zip + "...");
+        unzip(zip, process.cwd(), function (error) {
+          if (error) return done(error);
+
+          console.log("  Removing " + zip + "...");
+          fs.remove(zip);
+          done();});});
+
+
+
+
+
+      dir = dir || basename(zip, ".zip");
+      console.log("  Changing to " + dir + "...");
+      process.chdir(dir);
+
+      console.log("  Installing dependencies...");
+      _child_process2.default.spawnSync("npm" + (_os2.default.platform().startsWith("win") ? ".cmd" : ""), ["install"]);
+
+      res = Cli.runCatalogedTasks("./Justo.json", calls, { only: opts.only });
+      process.chdir("..");
+
+
+      return res;} }]);return Cli;}();exports.default = Cli;

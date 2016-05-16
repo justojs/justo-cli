@@ -1,6 +1,6 @@
 {
   "name": "justo-cli",
-  "version": "0.16.1",
+  "version": "0.17.0",
   "description": "The Justo.js CLI.",
   "years": "2015-2016",
   "homepage": "http://www.justojs.org",
@@ -34,8 +34,10 @@
     "npm": ">=3.0.0"
   },
   "dependencies": {
+    "justo-download": "*",
     "justo-fs": "*",
-    "justo-loader": "*",
+    "justo-sync": "*",
+    "justo-unzip": "*",
     "text-table": "*",
     "yargs": "*"
   },

@@ -29,6 +29,16 @@ opts = yargs
     type: "boolean",
     default: false
   })
+  .option("d", {
+    alias: "download",
+    describe: "URL for the standalone project.",
+    type: "string"
+  })
+  .option("D", {
+    alias: "dir",
+    describe: "Directory where to change if -d option.",
+    type: "string"
+  })
   .option("g", {
     alias: "generate",
     describe: "Run the specified generator.",
@@ -66,6 +76,10 @@ if (opts.issue) {
 } else if (opts.catalog) {
   Cli.listCatalogedTasks("./Justo.json");
 } else {
-  var res = Cli.runCatalogedTasks("./Justo.json", opts._, {only: opts.only});
+  var res;
+
+  if (opts.download) res = Cli.downloadAndRunCatalogedTasks(opts.download, opts.dir, "./Justo.json", opts._, {only: opts.only});
+  else res = Cli.runCatalogedTasks("./Justo.json", opts._, {only: opts.only});
+
   if (res.state.name == "FAILED") process.exit(1);
 }
