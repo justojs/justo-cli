@@ -151,13 +151,13 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
 
-    path) {
-      var Loader = require("justo-loader").Loader;
+    pth) {
+      var Loader = require(_path2.default.join(process.cwd(), "node_modules/justo-loader")).Loader;
       var table = require("text-table");
       var justo, config, tbl;
 
 
-      config = _JustoJson2.default.read(path);
+      config = _JustoJson2.default.read(pth);
       justo = Loader.loadJusto();
       justo.initialize(config);
       Loader.load(config.runner.main);
