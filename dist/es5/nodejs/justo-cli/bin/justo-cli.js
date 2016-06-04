@@ -82,4 +82,5 @@ if (opts.issue) {
   else res = Cli.runCatalogedTasks("./Justo.json", opts._, {only: opts.only});
 
   if (res.state.name == "FAILED") process.exit(1);
+  else process.exit();
 }
