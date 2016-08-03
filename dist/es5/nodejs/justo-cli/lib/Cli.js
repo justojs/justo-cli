@@ -17,8 +17,9 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
 
-    name, params, opts) {
-      var cmd, answers, help, pkg, pkgName;
+
+    justojson, name, params, opts) {
+      var cmd, answers, dst, help, pkg, pkgName, config;
 
 
       answers = {};var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
@@ -35,7 +36,9 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
       if (/^help ?/.test(cmd)) {
         help = true;
-        cmd = cmd.replace(/^help ?/, "");}
+        cmd = cmd.replace(/^help ?/, "");} else 
+      if (/^dst *$/.test(cmd)) {
+        dst = true;}
 
 
 
@@ -51,8 +54,18 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
 
+      config = _JustoJson2.default.read(justojson).generator[pkgName];
+      if (!config) config = {};
+      if (!config.dst) config.dst = process.cwd();
+
+
       if (help) showHelp();else 
-      run();
+      if (dst) showDst(config);else 
+      run(config);
+
+
+      function showDst() {
+        console.log(config.dst);}
 
 
       function showHelp() {
@@ -130,7 +143,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
 
-      function run() {
+      function run(config) {
         var Class, gen;
 
 
@@ -140,6 +153,8 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
         gen = new Class({ mute: opts.mute }, answers);
         if (!gen.src) gen.src = _path2.default.join(_path2.default.dirname(require.resolve(pkgName)), "template");
+        if (config.dst) gen.dst = config.dst;
+        if (!gen.dst) gen.dst = process.cwd();
 
 
         gen.run();}} }, { key: "listCatalogedTasks", value: function listCatalogedTasks(

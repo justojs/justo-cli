@@ -20,6 +20,7 @@ JustoJson = function () {function JustoJson() {_classCallCheck(this, JustoJson);
       config = file.exists() ? file.json : {};
 
 
+      if (!config.generator) config.generator = {};
       if (!config.runner) config.runner = { main: "./Justo.js" };
       if (!config.runner.main) config.runner.main = "./Justo.js";
       if (!config.runner.main.startsWith(".")) config.runner.main = _path2.default.join(".", config.runner.main);

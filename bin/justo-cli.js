@@ -21,7 +21,8 @@ opts = yargs
     "\nUsage:" +
     "\n  justo [options] [tasks]" +
     "\n  justo [-m] -g generator [command] [parameters]" +
-    "\n  justo [-m] -g generator help [command]"
+    "\n  justo [-m] -g generator help [command]" +
+    "\n  justo [-m] -g generator dst"
   )
   .option("c", {
     alias: "catalog",
@@ -72,7 +73,7 @@ opts = yargs
 if (opts.issue) {
   console.log("Web: https://github.com/justojs/justo-issues\nEmail: issues@justojs.org");
 } else if (opts.generate) {
-  Cli.generate(opts.generate.toLowerCase(), opts._, {mute: opts.mute});
+  Cli.generate("./Justo.json", opts.generate.toLowerCase(), opts._, {mute: opts.mute});
 } else if (opts.catalog) {
   Cli.listCatalogedTasks("./Justo.json");
 } else {
