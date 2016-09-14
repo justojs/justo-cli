@@ -74,6 +74,7 @@ if (opts.issue) {
   console.log("Web: https://github.com/justojs/justo-issues\nEmail: issues@justojs.org");
 } else if (opts.generate) {
   Cli.generate("./Justo.json", opts.generate.toLowerCase(), opts._, {mute: opts.mute});
+  process.exit();
 } else if (opts.catalog) {
   Cli.listCatalogedTasks("./Justo.json");
 } else {

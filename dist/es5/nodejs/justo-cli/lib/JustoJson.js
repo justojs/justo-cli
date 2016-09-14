@@ -3,7 +3,7 @@ var _path = require("path");var _path2 = _interopRequireDefault(_path);
 var _justoFs = require("justo-fs");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
 
 
-var config;var 
+var config;var
 
 
 
@@ -30,21 +30,12 @@ JustoJson = function () {function JustoJson() {_classCallCheck(this, JustoJson);
       if (!config.reporter) config.reporter = { type: "coloredConsole" };
 
 
-      return config;} }, { key: "config", get: function get() 
-
-
-    {
-      return config;} }, { key: "runner", get: function get() 
-
-
-
-
-
-
+      return config;
+    } }, { key: "config", get: function get()
 
     {
-      return config.runner;} }, { key: "automator", get: function get() 
-
+      return config;
+    } }, { key: "runner", get: function get()
 
 
 
@@ -52,8 +43,8 @@ JustoJson = function () {function JustoJson() {_classCallCheck(this, JustoJson);
 
 
     {
-      return config.automator;} }, { key: "tester", get: function get() 
-
+      return config.runner;
+    } }, { key: "automator", get: function get()
 
 
 
@@ -61,4 +52,14 @@ JustoJson = function () {function JustoJson() {_classCallCheck(this, JustoJson);
 
 
     {
-      return config.tester;} }]);return JustoJson;}();exports.default = JustoJson;
+      return config.automator;
+    } }, { key: "tester", get: function get()
+
+
+
+
+
+
+    {
+      return config.tester;
+    } }]);return JustoJson;}();exports.default = JustoJson;

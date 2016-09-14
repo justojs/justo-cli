@@ -17,11 +17,12 @@
 
       if (line.indexOf(":") < 0) {
         name = line;
-        value = [];} else 
-      {
+        value = [];
+      } else {
         name = line.substr(0, line.indexOf(":"));
-        value = line.split(":").slice(1);}
+        value = line.split(":").slice(1);
+      }
 
 
-
-      return [name, value];} }]);return ParamParser;}();exports.default = ParamParser;
+      return [name, value];
+    } }]);return ParamParser;}();exports.default = ParamParser;
