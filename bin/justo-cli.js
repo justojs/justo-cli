@@ -40,13 +40,18 @@ opts = yargs
     describe: "Directory where to change if -d option.",
     type: "string"
   })
+  .option("debug", {
+    describe: "Show more info when error caught by Justo.",
+    type: "boolean",
+    default: false
+  })
   .option("g", {
     alias: "generate",
     describe: "Run the specified generator.",
     type: "string"
   })
   .help("h", "Show help.")
-  // .alias("h", "help")
+  .alias("h", "help")
   .option("issue", {
     describe: "Show how to notify an issue.",
     type: "boolean",
@@ -73,15 +78,37 @@ opts = yargs
 if (opts.issue) {
   console.log("Web: https://github.com/justojs/justo-issues\nEmail: issues@justojs.org");
 } else if (opts.generate) {
-  Cli.generate("./Justo.json", opts.generate.toLowerCase(), opts._, {mute: opts.mute});
-  process.exit();
+  let res;
+
+  try {
+    Cli.generate("./Justo.json", opts.generate.toLowerCase(), opts._, {mute: opts.mute});
+    res = 0;
+  }  catch (e) {
+    if (opts.debug) console.error(e);
+    else console.error(e.message);
+
+    res = 1;
+  }
+
+  process.exit(res);
 } else if (opts.catalog) {
   Cli.listCatalogedTasks("./Justo.json");
 } else {
-  var res;
+  let res;
 
-  if (opts.download) res = Cli.downloadAndRunCatalogedTasks(opts.download, opts.dir, "./Justo.json", opts._, {only: opts.only});
-  else res = Cli.runCatalogedTasks("./Justo.json", opts._, {only: opts.only});
+  try {
+    if (opts.download) res = Cli.downloadAndRunCatalogedTasks(opts.download, opts.dir, "./Justo.json", opts._, {only: opts.only});
+    else res = Cli.runCatalogedTasks("./Justo.json", opts._, {only: opts.only});
+  } catch (e) {
+    if (opts.debug) console.error(e);
+    else console.error(e.message);
+
+    res = {
+      state: {
+        name: "FAILED"
+      }
+    };
+  }
 
   if (res.state.name == "FAILED") process.exit(1);
   else process.exit();
