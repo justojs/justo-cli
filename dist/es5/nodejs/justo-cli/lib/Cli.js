@@ -26,7 +26,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
         for (var _iterator = params[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var p = _step.value;
           if (/^.+:.*$/.test(p)) {var _ParamParser$parse =
-            _ParamParser2.default.parse(p, opts);var _ParamParser$parse2 = _slicedToArray(_ParamParser$parse, 2);var _name3 = _ParamParser$parse2[0];var value = _ParamParser$parse2[1];
+            _ParamParser2.default.parse(p, opts),_ParamParser$parse2 = _slicedToArray(_ParamParser$parse, 2),_name3 = _ParamParser$parse2[0],value = _ParamParser$parse2[1];
             answers[_name3] = value.length == 1 ? value[0] : value;
           } else {
             if (cmd) cmd += " " + p;else
@@ -93,24 +93,26 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
           var names = Object.keys(help.params);
 
           if (names.length > 0) {
-            var tbl = [["  Name", "Type", "Description", "Choices"]];var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
+            var tbl = [["  Name", "Type", "Description", "Options"]];var _iteratorNormalCompletion2 = true;var _didIteratorError2 = false;var _iteratorError2 = undefined;try {
 
               for (var _iterator2 = names.sort()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {var _name = _step2.value;
-                var param = void 0,type = void 0,title = void 0,choices = void 0;
+                var param = void 0,type = void 0,title = void 0,_opts = void 0;
 
                 param = help.params[_name];
 
                 if (typeof param == "string") {
                   type = "String";
                   title = param;
-                  choices = "";
+                  _opts = "";
                 } else {
                   type = param.type || "String";
                   title = param.title || "";
-                  choices = param.choices ? param.choices.join(", ") : "";
+                  if ("choices" in param) _opts = param.choices ? param.choices.join(", ") : "";else
+                  if ("options" in param) _opts = param.options ? param.options.join(", ") : "";else
+                  _opts = "";
                 }
 
-                tbl.push(["  " + _name, type, title, choices]);
+                tbl.push(["  " + _name, type, title, _opts]);
               }} catch (err) {_didIteratorError2 = true;_iteratorError2 = err;} finally {try {if (!_iteratorNormalCompletion2 && _iterator2.return) {_iterator2.return();}} finally {if (_didIteratorError2) {throw _iteratorError2;}}}
 
             console.log("\nParameters:");
