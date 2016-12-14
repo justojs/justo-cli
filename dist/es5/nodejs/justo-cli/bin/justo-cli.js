@@ -51,7 +51,7 @@ opts = yargs
     type: "string"
   })
   .help("h", "Show help.")
-  .alias("h", "help")
+  // .alias("h", "help")
   .option("issue", {
     describe: "Show how to notify an issue.",
     type: "boolean",
