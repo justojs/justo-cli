@@ -36,6 +36,12 @@ opts = yargs
     type: "boolean",
     default: false
   })
+  .option("d", {
+    alias: "dev",
+    describe: "Use Justo.dev.js instead of Justo.js.",
+    type: "boolean",
+    default: false
+  })
   .option("g", {
     alias: "generate",
     describe: "Run the specified generator.",
@@ -87,10 +93,12 @@ if (opts.issue) {
 
   process.exit(res);
 } else if (opts.catalog) {
-  let res;
+  let res, oo = {};
+
+  if (opts.dev) oo = {runner: {main: "./Justo.dev.js"}};
 
   try {
-    Cli.listCatalogedTasks("./Justo.json");
+    Cli.listCatalogedTasks("./Justo.json", oo);
     res = 0;
   } catch (e) {
     if (/Cannot find module.*node_modules.justo-loader/.test(e.message)) {
@@ -108,8 +116,14 @@ if (opts.issue) {
   let res;
 
   try {
-    if (opts.module) res = Cli.runInstalledModule(opts.module, opts._, {only: opts.only});
-    else res = Cli.runCatalogedTasks("./Justo.json", opts._, {only: opts.only});
+    if (opts.module) {
+      res = Cli.runInstalledModule(opts.module, opts._, {only: opts.only});
+    } else {
+      let oo = {};
+      if (opts.only) oo.only = opts.only;
+      if (opts.dev) oo.runner = {main: "./Justo.dev.js"};
+      res = Cli.runCatalogedTasks("./Justo.json", opts._, oo);
+    }
   } catch (e) {
     if (opts.debug) console.error(e);
     else console.error(e.message);

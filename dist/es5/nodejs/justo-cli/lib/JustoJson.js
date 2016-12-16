@@ -14,7 +14,8 @@ JustoJson = function () {function JustoJson() {_classCallCheck(this, JustoJson);
 
 
 
-    {var file = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
+
+    {var file = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       if (file) {
         file = new _justoFs.File(file);
@@ -27,6 +28,7 @@ JustoJson = function () {function JustoJson() {_classCallCheck(this, JustoJson);
       if (!config.generator) config.generator = {};
       if (!config.runner) config.runner = { main: "./Justo.js" };
       if (!config.runner.main) config.runner.main = "./Justo.js";
+      if (opts.runner && opts.runner.main) config.runner.main = opts.runner.main;
       if (!config.runner.main.startsWith(".")) config.runner.main = _path2.default.join(".", config.runner.main);
       config.runner.main = _path2.default.normalize(config.runner.main);
       if (!config.runner.onError) config.runner.onError = "continue";

@@ -168,13 +168,14 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
 
-    pth) {
+
+    pth, opts) {
       var Loader = require(_path2.default.join(process.cwd(), "node_modules/justo-loader")).Loader;
       var table = require("text-table");
       var justo, config, tbl;
 
 
-      config = _JustoJson2.default.read(pth);
+      config = _JustoJson2.default.read(pth, opts);
       justo = Loader.loadJusto();
       justo.initialize(config);
       Loader.load(config.runner.main);
@@ -213,7 +214,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
       if (!opts) opts = { only: false };
 
 
-      justojson = _JustoJson2.default.read(justojson);
+      justojson = _JustoJson2.default.read(justojson, opts);
       if (opts.hasOwnProperty("only")) justojson.runner.only = opts.only;
       justo = Loader.loadJusto();
       justo.initialize(justojson);
