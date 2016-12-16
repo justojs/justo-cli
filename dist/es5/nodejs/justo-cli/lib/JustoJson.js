@@ -8,16 +8,20 @@ var config;var
 
 
 
-JustoJson = function () {function JustoJson() {_classCallCheck(this, JustoJson);}_createClass(JustoJson, null, [{ key: "read", value: function read(
+JustoJson = function () {function JustoJson() {_classCallCheck(this, JustoJson);}_createClass(JustoJson, null, [{ key: "read", value: function read()
 
 
 
 
 
-    file) {
+    {var file = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
 
-      file = new _justoFs.File(file);
-      config = file.exists() ? file.json : {};
+      if (file) {
+        file = new _justoFs.File(file);
+        config = file.exists() ? file.json : {};
+      } else {
+        config = {};
+      }
 
 
       if (!config.generator) config.generator = {};

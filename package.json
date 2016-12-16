@@ -1,6 +1,5 @@
-{
-  "name": "justo-cli",
-  "version": "0.18.4",
+{  "name": "justo-cli",
+  "version": "0.19.0",
   "description": "The Justo.js CLI.",
   "years": "2015-2016",
   "homepage": "http://www.justojs.org",

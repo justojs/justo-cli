@@ -224,7 +224,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
       return { state: justo.runner.state };
-    } }, { key: "downloadAndRunCatalogedTasks", value: function downloadAndRunCatalogedTasks(
+    } }, { key: "runInstalledModule", value: function runInstalledModule(
 
 
 
@@ -235,44 +235,74 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
 
-    src, dir, justojson, calls, opts) {
-      var download = require("justo-download");
-      var sync = require("justo-sync");
-      var unzip = require("justo-unzip");
-      var url = require("url");
-      var zip = _path2.default.basename(url.parse(src).path);
-      var res;
-
-
-      sync(function (done) {
-        console.log("  Downloading " + src + "...");
-        download(src, process.cwd(), done);
-      });
-
-
-      sync(function (done) {
-        console.log("  Unzipping " + zip + "...");
-        unzip(zip, process.cwd(), function (error) {
-          if (error) return done(error);
-
-          console.log("  Removing " + zip + "...");
-          fs.remove(zip);
-          done();
-        });
-      });
 
 
 
-      dir = dir || basename(zip, ".zip");
-      console.log("  Changing to " + dir + "...");
-      process.chdir(dir);
-
-      console.log("  Installing dependencies...");
-      _child_process2.default.spawnSync("npm" + (_os2.default.platform().startsWith("win") ? ".cmd" : ""), ["install"]);
-
-      res = Cli.runCatalogedTasks("./Justo.json", calls, { only: opts.only });
-      process.chdir("..");
 
 
-      return res;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    name, calls, opts) {
+      var Calls = require("./Calls").default;
+      var Loader, justo, justojson;
+
+
+      process.chdir(_path2.default.dirname(require.resolve(name)));
+
+
+      if (!calls || calls.length === 0) calls = ["default"];
+
+
+      Loader = require(_path2.default.join(process.cwd(), "node_modules/justo-loader")).Loader;
+      justojson = _JustoJson2.default.read("Justo.json");
+      justo = Loader.loadJusto();
+      justo.initialize(justojson);
+
+
+      require(name);
+
+
+      justo.runner.runCatalogedTasks(Calls.parse(calls, { only: opts.only }));
+
+
+      return { state: justo.runner.state };
     } }]);return Cli;}();exports.default = Cli;

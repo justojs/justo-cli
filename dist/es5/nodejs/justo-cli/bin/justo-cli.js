@@ -20,25 +20,16 @@ opts = yargs
   .usage(
     "\nUsage:" +
     "\n  justo [options] [tasks]" +
-    "\n  justo [-m] -g generator [command] [parameters]" +
-    "\n  justo [-m] -g generator help [command]" +
-    "\n  justo [-m] -g generator dst"
+    "\n  justo [--mute] -g generator [command] [parameters]" +
+    "\n  justo [--mute] -g generator help [command]" +
+    "\n  justo [--mute] -g generator dst" +
+    "\n  justo -m module [tasks]"
   )
   .option("c", {
     alias: "catalog",
-    describe: "List the cataloged tasks into the Justo.js file.",
+    describe: "List the cataloged tasks in the current Justo.js file.",
     type: "boolean",
     default: false
-  })
-  .option("d", {
-    alias: "download",
-    describe: "URL for the standalone project.",
-    type: "string"
-  })
-  .option("D", {
-    alias: "dir",
-    describe: "Directory where to change if -d option.",
-    type: "string"
   })
   .option("debug", {
     describe: "Show more info when error caught by Justo.",
@@ -58,7 +49,11 @@ opts = yargs
     default: false
   })
   .option("m", {
-    alias: "mute",
+    alias: "module",
+    describe: "Run the Justo module installed globally with npm.",
+    type: "string"
+  })
+  .option("mute", {
     describe: "Mute the reporter.",
     type: "boolean",
     default: false
@@ -92,12 +87,28 @@ if (opts.issue) {
 
   process.exit(res);
 } else if (opts.catalog) {
-  Cli.listCatalogedTasks("./Justo.json");
+  let res;
+
+  try {
+    Cli.listCatalogedTasks("./Justo.json");
+    res = 0;
+  } catch (e) {
+    if (/Cannot find module.*node_modules.justo-loader/.test(e.message)) {
+      console.error("It seems not to be installed the justo package.");
+    }
+
+    if (opts.debug) console.error(e);
+    else console.error(e.message);
+
+    res = 1;
+  }
+
+  process.exit(res);
 } else {
   let res;
 
   try {
-    if (opts.download) res = Cli.downloadAndRunCatalogedTasks(opts.download, opts.dir, "./Justo.json", opts._, {only: opts.only});
+    if (opts.module) res = Cli.runInstalledModule(opts.module, opts._, {only: opts.only});
     else res = Cli.runCatalogedTasks("./Justo.json", opts._, {only: opts.only});
   } catch (e) {
     if (opts.debug) console.error(e);
