@@ -294,7 +294,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
       Loader = require(_path2.default.join(process.cwd(), "node_modules/justo-loader")).Loader;
-      justojson = _JustoJson2.default.read("Justo.json");
+      justojson = _JustoJson2.default.read("Justo.json", opts);
       justo = Loader.loadJusto();
       justo.initialize(justojson);
 

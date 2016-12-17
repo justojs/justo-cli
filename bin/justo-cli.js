@@ -25,6 +25,12 @@ opts = yargs
     "\n  justo [--mute] -g generator dst" +
     "\n  justo -m module [tasks]"
   )
+  .option("b", {
+    alias: "break",
+    describe: "Break on failed task.",
+    type: "boolean",
+    default: false
+  })
   .option("c", {
     alias: "catalog",
     describe: "List the cataloged tasks in the current Justo.js file.",
@@ -93,9 +99,9 @@ if (opts.issue) {
 
   process.exit(res);
 } else if (opts.catalog) {
-  let res, oo = {};
+  let res, oo = {runner: {}};
 
-  if (opts.dev) oo = {runner: {main: "./Justo.dev.js"}};
+  if (opts.dev) oo.runner.main = "./Justo.dev.js";
 
   try {
     Cli.listCatalogedTasks("./Justo.json", oo);
@@ -113,15 +119,16 @@ if (opts.issue) {
 
   process.exit(res);
 } else {
-  let res;
+  let res, oo = {runner: {}};
+
+  if (opts.only) oo.only = opts.only;
+  if (opts.break) oo.runner.onError = "break";
+  if (opts.dev) oo.runner.main = "./Justo.dev.js";
 
   try {
     if (opts.module) {
-      res = Cli.runInstalledModule(opts.module, opts._, {only: opts.only});
+      res = Cli.runInstalledModule(opts.module, opts._, oo);
     } else {
-      let oo = {};
-      if (opts.only) oo.only = opts.only;
-      if (opts.dev) oo.runner = {main: "./Justo.dev.js"};
       res = Cli.runCatalogedTasks("./Justo.json", opts._, oo);
     }
   } catch (e) {
