@@ -161,6 +161,28 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
         gen.run();
       }
+    } }, { key: "listInstalledGenerators", value: function listInstalledGenerators()
+
+
+
+
+    {
+      var ls,gens = [];
+      var table = require("text-table");
+
+
+      ls = _child_process2.default.spawnSync("npm", ["ls", "-g", "--json", "--long"]);
+      ls = JSON.parse(ls.stdout.toString()).dependencies;
+
+
+      for (var pkgName in ls) {
+        var pkg = ls[pkgName];
+        if (pkg.keywords && pkg.keywords.indexOf("justo-generator") >= 0) gens.push([pkg.name, pkg.version, pkg.description]);
+      }
+
+
+      if (gens.length > 0) gens = [["Name", "Version", "Description"]].concat(gens);
+      console.log(table(gens));
     } }, { key: "listCatalogedTasks", value: function listCatalogedTasks(
 
 

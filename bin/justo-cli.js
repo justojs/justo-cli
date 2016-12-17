@@ -53,6 +53,11 @@ opts = yargs
     describe: "Run the specified generator.",
     type: "string"
   })
+  .option("generators", {
+    describe: "List the installed generators.",
+    type: "boolean",
+    default: false
+  })
   .help("h", "Show help.")
   // .alias("h", "help")
   .option("issue", {
@@ -118,6 +123,8 @@ if (opts.issue) {
   }
 
   process.exit(res);
+} if (opts.generators) {
+  Cli.listInstalledGenerators();
 } else {
   let res, oo = {runner: {}};
 
