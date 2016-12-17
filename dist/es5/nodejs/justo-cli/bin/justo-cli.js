@@ -22,7 +22,6 @@ opts = yargs
     "\n  justo [options] [tasks]" +
     "\n  justo [--mute] -g generator [command] [parameters]" +
     "\n  justo [--mute] -g generator help [command]" +
-    "\n  justo [--mute] -g generator dst" +
     "\n  justo -m module [tasks]"
   )
   .option("b", {
@@ -94,11 +93,11 @@ opts = yargs
 //(3) run
 if (opts.issue) {
   console.log("Web: https://github.com/justojs/justo-issues\nEmail: issues@justojs.org");
-} else if (opts.generate) {
+} else if (opts.generator) {
   let res;
 
   try {
-    Cli.generate("./Justo.json", opts.generate.toLowerCase(), opts._, {mute: opts.mute});
+    Cli.generate("./Justo.json", opts.generator.toLowerCase(), opts._, {mute: opts.mute});
     res = 0;
   }  catch (e) {
     if (opts.debug) console.error(e);
@@ -128,9 +127,9 @@ if (opts.issue) {
   }
 
   process.exit(res);
-} if (opts.generators) {
+} else if (opts.generators) {
   Cli.listInstalledGenerators();
-} if (opts.modules) {
+} else if (opts.modules) {
   Cli.listInstalledModules();
 } else {
   let res, oo = {runner: {}};
