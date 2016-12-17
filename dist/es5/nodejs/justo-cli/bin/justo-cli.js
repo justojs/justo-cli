@@ -49,7 +49,7 @@ opts = yargs
     default: false
   })
   .option("g", {
-    alias: "generate",
+    alias: "generator",
     describe: "Run the specified generator.",
     type: "string"
   })
@@ -69,6 +69,11 @@ opts = yargs
     alias: "module",
     describe: "Run the Justo module installed globally with npm.",
     type: "string"
+  })
+  .option("modules", {
+    describe: "List the installed modules.",
+    type: "boolean",
+    default: false
   })
   .option("mute", {
     describe: "Mute the reporter.",
@@ -125,6 +130,8 @@ if (opts.issue) {
   process.exit(res);
 } if (opts.generators) {
   Cli.listInstalledGenerators();
+} if (opts.modules) {
+  Cli.listInstalledModules();
 } else {
   let res, oo = {runner: {}};
 

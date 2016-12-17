@@ -328,4 +328,26 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
 
       return { state: justo.runner.state };
+    } }, { key: "listInstalledModules", value: function listInstalledModules()
+
+
+
+
+    {
+      var ls,mods = [];
+      var table = require("text-table");
+
+
+      ls = _child_process2.default.spawnSync("npm", ["ls", "-g", "--json", "--long"]);
+      ls = JSON.parse(ls.stdout.toString()).dependencies;
+
+
+      for (var pkgName in ls) {
+        var pkg = ls[pkgName];
+        if (pkg.keywords && pkg.keywords.indexOf("justo-module") >= 0) mods.push([pkg.name, pkg.version, pkg.description]);
+      }
+
+
+      if (mods.length > 0) mods = [["Name", "Version", "Description"]].concat(mods);
+      console.log(table(mods));
     } }]);return Cli;}();exports.default = Cli;
