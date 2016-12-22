@@ -177,7 +177,7 @@ Cli = function () {function Cli() {_classCallCheck(this, Cli);}_createClass(Cli,
 
       for (var pkgName in ls) {
         var pkg = ls[pkgName];
-        if (pkg.keywords && pkg.keywords.indexOf("justo-generator") >= 0) gens.push([pkg.name, pkg.version, pkg.description]);
+        if (pkg.keywords && pkg.keywords.indexOf("justo-generator") >= 0 && /^justo-generator-/.test(pkg.name)) gens.push([pkg.name, pkg.version, pkg.description]);
       }
 
 
